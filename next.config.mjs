@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable React Strict Mode
+  output: "export",
   reactStrictMode: true,
 
   // Image optimization settings

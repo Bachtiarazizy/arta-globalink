@@ -57,13 +57,13 @@ export default function Navbar() {
         <div className="flex items-center space-x-6">
           <ul className="flex items-center space-x-6">
             <li>
-              <NavLink href="#">Home</NavLink>
+              <NavLink href="#home">Home</NavLink>
             </li>
             <li>
-              <NavLink href="#">About</NavLink>
+              <NavLink href="#about">About</NavLink>
             </li>
             <li>
-              <NavLink href="#">Product</NavLink>
+              <NavLink href="#products">Product</NavLink>
             </li>
           </ul>
         </div>

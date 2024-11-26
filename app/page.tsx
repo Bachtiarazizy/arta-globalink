@@ -76,8 +76,8 @@ export default function Home() {
         }}
       >
         {/* Hero Section */}
-        <motion.div ref={heroAnimation.ref} initial="hidden" animate={heroAnimation.controls} variants={heroAnimation.variants} className="relative min-h-[650px] md:min-h-[650px] w-full overflow-hidden flex items-center">
-          <Image src="/assets/hero.jpg" alt="Hero background" fill className="object-cover absolute inset-0" quality={90} />
+        <motion.div ref={heroAnimation.ref} initial="hidden" animate={heroAnimation.controls} variants={heroAnimation.variants} id="home" className="relative min-h-[650px] md:min-h-[650px] w-full overflow-hidden flex items-center">
+          <Image src="/assets/hero.jpeg" alt="Hero background" fill className="object-cover absolute inset-0" quality={90} />
 
           <div className="absolute inset-0 bg-[#311717] opacity-50" />
 
@@ -136,7 +136,7 @@ export default function Home() {
         </motion.div>
 
         {/* About Section */}
-        <motion.section ref={aboutAnimation.ref} initial="hidden" animate={aboutAnimation.controls} variants={aboutAnimation.variants} className="mt-14 w-full px-6 sm:px-12 lg:px-24">
+        <motion.section ref={aboutAnimation.ref} initial="hidden" animate={aboutAnimation.controls} variants={aboutAnimation.variants} className="mt-14 w-full px-6 sm:px-12 lg:px-24" id="about">
           <h1 className="text-[#292929] text-3xl md:text-4xl font-bold text-center md:text-left">About Company</h1>
           <motion.div whileHover={{ scale: 1.02 }} className="bg-[#292929] w-full mt-6 rounded-2xl p-6 flex flex-col md:flex-row">
             {/* Image Section */}
@@ -167,7 +167,7 @@ export default function Home() {
         </motion.section>
 
         {/* Cocoa Products Section */}
-        <motion.section ref={cocoaProductsAnimation.ref} initial="hidden" animate={cocoaProductsAnimation.controls} variants={cocoaProductsAnimation.variants} className="mt-14 w-full px-6 sm:px-12 lg:px-24">
+        <motion.section ref={cocoaProductsAnimation.ref} initial="hidden" animate={cocoaProductsAnimation.controls} id="products" variants={cocoaProductsAnimation.variants} className="mt-14 w-full px-6 sm:px-12 lg:px-24">
           <motion.h1
             variants={{
               hidden: { opacity: 0, x: -50 },
