@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { ChevronRight, Menu, X } from "lucide-react";
 
 // Define prop types for NavLink component
@@ -70,7 +69,7 @@ export default function Navbar() {
 
         {/* Middle Logo */}
         <div className="flex justify-center">
-          <Image src="/assets/logo.png" alt="Logo" width={200} height={100} priority />
+          <img src="/assets/logo.png" alt="Logo" width={200} height={100} />
         </div>
 
         {/* Right Side */}
@@ -83,7 +82,7 @@ export default function Navbar() {
       <nav className="md:hidden absolute top-0 left-0 w-full z-50">
         {/* Top Bar */}
         <div className="flex justify-between items-center p-4 bg-[#311717]/50">
-          <Image src="/assets/logo.png" alt="Logo" width={150} height={75} priority />
+          <img src="/assets/logo.png" alt="Logo" width={150} height={75} />
 
           <button onClick={toggleMenu} className="text-white focus:outline-none" aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}>
             {isMenuOpen ? <X size={32} /> : <Menu size={32} />}

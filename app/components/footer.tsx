@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MailCheck, Phone, MapPinCheck, Facebook, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="flex flex-col items-center sm:items-start">
             <div className="flex justify-center sm:justify-start">
-              <Image src="/assets/logo.png" alt="Logo" width={200} height={100} priority className="max-w-[150px] sm:max-w-[200px] md:max-w-[250px]" />
+              <img src="/assets/logo.png" alt="Logo" width={200} height={100} className="max-w-[150px] sm:max-w-[200px] md:max-w-[250px]" />
             </div>
 
             <p className="mt-6 max-w-md text-center sm:text-left text-sm sm:text-base leading-relaxed text-white">Providing the best quality of agricultural commodities and suitable as raw materials for processed products</p>

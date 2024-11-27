@@ -37,7 +37,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ children }) => {
             }}
             className="w-24 h-24 border-4 border-[#E6B84F] rounded-full flex items-center justify-center"
           >
-            <span className="text-2xl font-bold text-[#E6B84F]">ARTA</span>
+            <img src="/assets/Pictorial.png" alt="Arta Globalink" />
           </motion.div>
         </motion.div>
       ) : (

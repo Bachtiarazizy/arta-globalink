@@ -2,7 +2,6 @@
 
 import { motion, useAnimation } from "framer-motion";
 import { ChevronRight, CheckCircle, Download } from "lucide-react";
-import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import CocoaProductSection from "./components/product-card";
 import Navbar from "./components/navbar";
@@ -76,9 +75,19 @@ export default function Home() {
         }}
       >
         {/* Hero Section */}
-        <motion.div ref={heroAnimation.ref} initial="hidden" animate={heroAnimation.controls} variants={heroAnimation.variants} id="home" className="relative min-h-[650px] md:min-h-[650px] w-full overflow-hidden flex items-center">
-          <Image src="/assets/hero.jpeg" alt="Hero background" fill className="object-cover absolute inset-0" quality={90} />
-
+        <motion.div
+          ref={heroAnimation.ref}
+          initial="hidden"
+          animate={heroAnimation.controls}
+          variants={heroAnimation.variants}
+          id="home"
+          className="relative min-h-[650px] md:min-h-[650px] w-full overflow-hidden flex items-center"
+          style={{
+            backgroundImage: `url('/assets/hero.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
           <div className="absolute inset-0 bg-[#311717] opacity-50" />
 
           <Navbar />
@@ -89,8 +98,10 @@ export default function Home() {
                 Connecting Markets, <br className="hidden md:block" />
                 Expanding Horizons
               </h1>
+
               <p className="font-regular text-lg mb-6 text-center md:text-left">
-                Providing the best quality of agricultural commodities <br className="hidden md:block" /> and suitable as raw materials for processed products
+                Providing the best quality of agricultural commodities <br className="hidden md:block" />
+                and suitable as raw materials for processed products
               </p>
 
               <div className="flex justify-center md:justify-start">
@@ -142,7 +153,7 @@ export default function Home() {
             {/* Image Section */}
             <div className="w-full md:w-1/2 order-1 md:order-2 mt-6 md:mt-0">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 300 }}>
-                <Image src="/assets/about-image.jpg" alt="About Arta Globalink" width={600} height={400} className="rounded-xl object-cover w-full h-auto md:h-full" />
+                <img src="/assets/about-image.jpg" alt="About Arta Globalink" width={600} height={400} className="rounded-xl object-cover w-full h-auto md:h-full" />
               </motion.div>
             </div>
 
@@ -182,7 +193,7 @@ export default function Home() {
             Our Cocoa Products
           </motion.h1>
           <CocoaProductSection />
-          <a href="/path/to/catalog.pdf">
+          <a href="/assets/Fortune Cocoa Catalogue.pdf" download>
             <div className="flex justify-center mt-8">
               <motion.button
                 whileHover={{ scale: 1.05 }}

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 // Define Product interface for type safety
 interface Product {
   image: string;
@@ -17,8 +15,8 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-      <div className="relative w-full h-48">
-        <Image src={image} alt={title} fill className="object-cover" />
+      <div className="relative w-full aspect-[4/3]">
+        <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
       </div>
       <div className="p-4 space-y-2">
         <h3 className="text-xl font-bold text-[#292929]">{title}</h3>
