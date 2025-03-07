@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "critters": "^0.0.25",
+    "gsap": "^3.12.7",
+    "lenis": "^1.2.2",
     "lucide-react": "^0.461.0",
     "motion": "^11.11.17",
     "next": "14.2.18",

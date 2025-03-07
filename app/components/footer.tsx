@@ -53,7 +53,7 @@ const Footer = () => {
 
               <ul className="mt-4 sm:mt-8 space-y-3 sm:space-y-4 text-xs sm:text-sm">
                 <li>
-                  <a className="text-white transition hover:text-white/75" href="#">
+                  <a className="text-white transition hover:text-white/75" href="/assets/Fortune Cocoa Catalogue.pdf" download>
                     Cacao Catalog
                   </a>
                 </li>

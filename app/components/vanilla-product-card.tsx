@@ -31,62 +31,17 @@ export default function VanillaProductSection() {
     {
       image: "/assets/vanilla/1.jpg",
       title: "Grade A Vanilla Beans - PLANIFOLIA",
-      description: "Straight, No Split, Brown to Dark brown color.",
+      description: "Straight, No Split, Brown to Dark Brown Color. Minimum size 17cm in length",
     },
     {
       image: "/assets/vanilla/2.jpg",
       title: "Grade B Vanilla Beans - PLANIFOLIA",
-      description: "Straight, Dark Brown with Light Strips",
+      description: "Straight , Dark Brown with Light Strips. Minimum size 15cm in length",
     },
     {
       image: "/assets/vanilla/3.jpg",
-      title: "Grade B Vanilla Beans - PLANIFOLIA",
-      description: "Not Straight/Curl, Brown with Light Strips",
-    },
-    {
-      image: "/assets/vanilla/4.jpg",
-      title: "Vanilla - Pure Vanilla Extract",
-      description: "Brown Liquid(not thick) with strong Vanilla aroma/scent",
-    },
-    {
-      image: "/assets/vanilla/5.jpg",
-      title: "Vanilla - Pure Vanilla Extract",
-      description: "Brown Liquid(not thick) with strong Vanilla aroma/scent",
-    },
-    {
-      image: "/assets/vanilla/6.jpg",
-      title: "Vanilla Paste - Premium Paste",
-      description: "Straight, No Split, Brown to Dark brown color.",
-    },
-    {
-      image: "/assets/vanilla/7.jpg",
-      title: "Vanilla Paste - Premium Paste",
-      description: "Straight, No Split, Brown to Dark brown color.",
-    },
-    {
-      image: "/assets/vanilla/8.jpg",
-      title: "Grade A Planifolia vanilla beans 10gr and 25gr",
-      description: "minimum 17cm in length, Straight, No Split, Brown to Dark brown color.",
-    },
-    {
-      image: "/assets/vanilla/9.jpg",
-      title: "Pure Vanilla Powder - Premium Quality",
-      description: "Rough Powder, brown, strong vanilla aroma",
-    },
-    {
-      image: "/assets/vanilla/10.jpg",
-      title: "Cut Vanilla",
-      description: "Cutted, brown, strong vanilla aroma",
-    },
-    {
-      image: "/assets/vanilla/11.jpg",
-      title: "Non Alcohol Vanilla Paste",
-      description: "Dark brown thick with a lot vanilla seeds with strong vanilla aroma/scent",
-    },
-    {
-      image: "/assets/vanilla/12.jpg",
-      title: "Non Alcohol Vanilla Extract",
-      description: "Light brown thick with a strong vanilla aroma/scent",
+      title: "Grade C Vanilla Beans - PLANIFOLIA",
+      description: "Not Straight, Curl, Brown with Light Brown Strips. Mixed Sizes",
     },
   ];
 

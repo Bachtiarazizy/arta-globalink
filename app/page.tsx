@@ -8,6 +8,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import PageLoader from "./components/pageLoader";
 import VanillaProductSection from "./components/vanilla-product-card";
+import ContactButton, { DownloadButton } from "./components/contact-button";
 
 // Reusable scroll animation hook
 const useScrollAnimation = () => {
@@ -90,8 +91,6 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-[#311717] opacity-50" />
 
-          <Navbar />
-
           <div className="relative z-10 w-full px-6 sm:px-12 lg:px-24 pt-16 md:pt-0">
             <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="text-center md:text-left text-white max-w-xl mx-auto lg:mx-0">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
@@ -105,14 +104,9 @@ export default function Home() {
               </p>
 
               <div className="flex justify-center md:justify-start">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#E6B84F] text-[#292929] px-6 py-2 sm:px-8 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[#E6B84F]/75 transition-colors flex items-center gap-2"
-                >
-                  Learn More
-                  <ChevronRight size={20} />
-                </motion.button>
+                <ContactButton href="#about" isExternal={false} variant="primary" size="md" icon={<ChevronRight size={20} />}>
+                  Learn more
+                </ContactButton>
               </div>
             </motion.div>
           </div>
@@ -153,7 +147,7 @@ export default function Home() {
             {/* Image Section */}
             <div className="w-full md:w-1/2 order-1 md:order-2 mt-6 md:mt-0">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 300 }}>
-                <img src="/assets/about-image.jpg" alt="About Arta Globalink" width={600} height={400} className="rounded-xl object-cover w-full h-auto md:h-full" />
+                <img src="/assets/about.jpg" alt="About Arta Globalink" width={600} height={400} className="rounded-xl object-cover w-full h-auto md:h-full" />
               </motion.div>
             </div>
 
@@ -164,14 +158,9 @@ export default function Home() {
                 the world who need it.
               </p>
               <div className="flex justify-center md:justify-start">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-44 text-[#E6B84F] border border-[#E6B84F] px-6 py-2 rounded-full font-semibold hover:bg-[#E6B84F]/75 hover:text-[#292929] transition-colors flex items-center gap-2"
-                >
-                  Learn More
-                  <ChevronRight size={20} />
-                </motion.button>
+                <ContactButton href="#about" isExternal={false} variant="secondary" size="md" icon={<ChevronRight size={20} />}>
+                  Learn more
+                </ContactButton>
               </div>
             </div>
           </motion.div>
@@ -193,18 +182,9 @@ export default function Home() {
             Our Cocoa Products
           </motion.h1>
           <CocoaProductSection />
-          <a href="/assets/Fortune Cocoa Catalogue.pdf" download>
-            <div className="flex justify-center mt-8">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#E6B84F] text-[#292929] px-6 py-2 sm:px-8 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[#E6B84F]/75 transition-colors flex items-center gap-2"
-              >
-                Download Catalog
-                <Download size={20} />
-              </motion.button>
-            </div>
-          </a>
+          <div className="flex justify-center mt-8">
+            <DownloadButton fileUrl="/assets/cocoa/Fortune Cocoa Powder Catalogue.pdf" fileName="Fortune Cocoa Powder Catalogue.pdf" />
+          </div>
         </motion.section>
 
         {/* Vanilla Products Section */}
@@ -223,21 +203,10 @@ export default function Home() {
             Our Vanilla Products
           </motion.h1>
           <VanillaProductSection />
-          <a href="/path/to/catalog.pdf">
-            <div className="flex justify-center mt-8">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#E6B84F] text-[#292929] px-6 py-2 sm:px-8 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[#E6B84F]/75 transition-colors flex items-center gap-2"
-              >
-                Download Catalog
-                <Download size={20} />
-              </motion.button>
-            </div>
-          </a>
+          <div className="flex justify-center mt-8">
+            <DownloadButton fileUrl="/assets/Fortune Cocoa Catalogue.pdf" fileName="Fortune Cocoa Catalogue.pdf" />
+          </div>
         </motion.section>
-
-        <Footer />
       </motion.main>
     </PageLoader>
   );

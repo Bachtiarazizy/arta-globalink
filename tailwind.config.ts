@@ -9,7 +9,7 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "ui-sans-serif", "system-ui"],
+        sans: ["var(--font-montserrat)", "ui-sans-serif", "system-ui"],
       },
       animation: {
         marquee: "marquee 20s linear infinite",

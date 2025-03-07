@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { DM_Sans } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import ScrollProvider from "./components/scroll-provider";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 
-const dmSans = DM_Sans({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-dm-sans",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${dmSans.variable} antialiased`}>{children}</body>
+      <body className={`${montserrat.variable} antialiased`}>
+        <Navbar />
+        <ScrollProvider>{children}</ScrollProvider>
+        <Footer />
+      </body>
     </html>
   );
 }

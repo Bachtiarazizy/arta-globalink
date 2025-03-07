@@ -29,44 +29,39 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) 
 export default function CocoaProductSection() {
   const products: Product[] = [
     {
-      image: "/assets/cocoa/1.jpg",
+      image: "/assets/cocoa/Natural.jpg",
       title: "FC900N Premium Quality Natural",
       description: "Cocoa Powder | HS CODE 18050000 | 50% Indonesian Beans, 50% African Beans.",
     },
     {
-      image: "/assets/cocoa/4.jpg",
+      image: "/assets/cocoa/Natural.jpg",
       title: "FC800N High Quality Natural",
       description: "Cocoa Powder | HS CODE 18050000 | 100% Indonesian Beans",
     },
     {
-      image: "/assets/cocoa/6.jpg",
+      image: "/assets/cocoa/Natural Low Fat.jpg",
       title: "FC700N Low Fat Natural",
       description: "Cocoa Powder | HS CODE 18050000 | 100% Indonesian Beans.",
     },
     {
-      image: "/assets/cocoa/2.jpg",
+      image: "/assets/cocoa/Alkalized.jpg",
       title: "FC900 Premium Quality Alkalized",
       description: "Cocoa Powder | HS CODE 18050000 | 50% Indonesian Beans, 50% African Beans.",
     },
     {
-      image: "/assets/cocoa/3.jpg",
+      image: "/assets/cocoa/Alkalized.jpg",
       title: "FC800 High Quality Alkalized",
       description: "Cocoa Powder | HS CODE 18050000 | 100% Indonesian Beans.",
     },
     {
-      image: "/assets/cocoa/5.jpg",
+      image: "/assets/cocoa/Alkalized Low Fat.jpg",
       title: "FC700 Low Fat Alkalized",
       description: "Cocoa Powder | HS CODE 18050000 | 100% Indonesian Beans.",
     },
     {
-      image: "/assets/cocoa/7.jpg",
+      image: "/assets/cocoa/Black Alkalized.jpg",
       title: "FC1000 Black Alkalized",
       description: "Cocoa Powder | HS CODE 18050000 | 100% Indonesian Beans.",
-    },
-    {
-      image: "/assets/cocoa/8.jpg",
-      title: "Pure Prime Pressed",
-      description: "Cocoa Butter.",
     },
   ];
 

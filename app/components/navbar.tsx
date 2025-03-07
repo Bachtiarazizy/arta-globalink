@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, Menu, X } from "lucide-react";
+import { ChevronRight, Linkedin, Menu, Phone, Send, X } from "lucide-react";
+import ContactButton from "./contact-button";
 
 // Define prop types for NavLink component
 interface NavLinkProps {
@@ -73,9 +74,9 @@ export default function Navbar() {
         </div>
 
         {/* Right Side */}
-        <a href="https://wa.me/6283815242643" target="_blank" rel="noopener noreferrer" className="bg-[#E6B84F] text-[#292929] px-4 py-2 rounded-full text-base font-semibold hover:bg-[#E6B84F]/75 transition-colors flex items-center gap-2">
+        <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
           Contact Us
-        </a>
+        </ContactButton>
       </nav>
 
       {/* Mobile Navigation */}
@@ -110,15 +111,9 @@ export default function Navbar() {
               <NavLink href="#" isMobile onClick={toggleMenu}>
                 Product
               </NavLink>
-              <a
-                href="https://wa.me/6283815242643"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#E6B84F] text-[#292929] px-6 py-3 rounded-full text-lg font-semibold hover:bg-[#E6B84F]/75 transition-colors flex items-center gap-2"
-              >
+              <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
                 Contact Us
-                <ChevronRight size={24} />
-              </a>
+              </ContactButton>
             </div>
           </motion.div>
         )}
