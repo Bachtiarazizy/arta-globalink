@@ -70,9 +70,9 @@ const Footer = () => {
 
               <ul className="mt-4 sm:mt-8 space-y-3 sm:space-y-4 text-xs sm:text-sm">
                 <li>
-                  <a className="flex items-center justify-center gap-1.5 sm:justify-start" href="mailto:artaglobalink@gmail.com">
+                  <a className="flex items-center justify-center gap-1.5 sm:justify-start" href="mailto:connect@artaglobalink.com">
                     <MailCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-white">artaglobalink@gmail.com</span>
+                    <span className="text-white">connect@artaglobalink.com</span>
                   </a>
                 </li>
 

@@ -13,34 +13,55 @@ interface NavLinkProps {
   className?: string;
 }
 
-// NavLink component with TypeScript typing
-const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onClick, className = "" }) => (
-  <a
-    href={href}
-    onClick={onClick}
-    className={`
-      font-medium 
-      relative 
-      group
-      ${isMobile ? "text-2xl text-white block text-center py-3" : "text-white"}
-      ${className}
-    `}
-  >
-    {children}
-    <span
+// NavLink component with TypeScript typing and smooth scrolling
+const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onClick, className = "" }) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // Get the section ID from the href
+    const sectionId = href.replace("#", "");
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      // Smooth scroll to the element
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth",
+      });
+
+      // If there's an onClick handler (like for mobile menu), call it
+      if (onClick) onClick();
+    }
+  };
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
       className={`
-        absolute 
-        bottom-0 
-        left-0 
-        h-0.5 
-        bg-white 
-        transition-all 
-        duration-300 
-        ${isMobile ? "w-0 group-hover:w-full" : "w-0 group-hover:w-full"}
+        font-medium 
+        relative 
+        group
+        ${isMobile ? "text-2xl text-white block text-center py-3" : "text-white"}
+        ${className}
       `}
-    ></span>
-  </a>
-);
+    >
+      {children}
+      <span
+        className={`
+          absolute 
+          bottom-0 
+          left-0 
+          h-0.5 
+          bg-white 
+          transition-all 
+          duration-300 
+          ${isMobile ? "w-0 group-hover:w-full" : "w-0 group-hover:w-full"}
+        `}
+      ></span>
+    </a>
+  );
+};
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -102,13 +123,13 @@ export default function Navbar() {
 
             {/* Menu Content Centered */}
             <div className="flex flex-col pt-24 items-center space-y-6">
-              <NavLink href="#" isMobile onClick={toggleMenu}>
+              <NavLink href="#home" isMobile onClick={toggleMenu}>
                 Home
               </NavLink>
-              <NavLink href="#" isMobile onClick={toggleMenu}>
+              <NavLink href="#about" isMobile onClick={toggleMenu}>
                 About
               </NavLink>
-              <NavLink href="#" isMobile onClick={toggleMenu}>
+              <NavLink href="#products" isMobile onClick={toggleMenu}>
                 Product
               </NavLink>
               <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>

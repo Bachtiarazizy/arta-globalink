@@ -4,8 +4,6 @@ import { motion, useAnimation } from "framer-motion";
 import { ChevronRight, CheckCircle, Download } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import CocoaProductSection from "./components/product-card";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
 import PageLoader from "./components/pageLoader";
 import VanillaProductSection from "./components/vanilla-product-card";
 import ContactButton, { DownloadButton } from "./components/contact-button";
@@ -147,7 +145,7 @@ export default function Home() {
             {/* Image Section */}
             <div className="w-full md:w-1/2 order-1 md:order-2 mt-6 md:mt-0">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 300 }}>
-                <img src="/assets/about.jpg" alt="About Arta Globalink" width={600} height={400} className="rounded-xl object-cover w-full h-auto md:h-full" />
+                <img src="/assets/about.jpg" sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px" alt="About Arta Globalink" loading="lazy" />
               </motion.div>
             </div>
 

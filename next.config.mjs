@@ -7,6 +7,7 @@ const nextConfig = {
   images: {
     domains: [], // Add external image domains if needed
     formats: ["image/avif", "image/webp"], // Preferred image formats for optimization
+    unoptimized: true,
   },
 
   // Custom Webpack configuration
@@ -29,6 +30,7 @@ const nextConfig = {
   },
 
   // Compiler configurations for production
+  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production", // Remove console logs in production
   },

@@ -154,13 +154,37 @@ type DownloadButtonProps = {
   className?: string;
 };
 
+const sizeStyles = {
+  sm: "px-4 py-1.5 text-sm",
+  md: "px-5 py-2.5 text-base",
+  lg: "px-6 py-3 text-lg",
+};
+
 export const DownloadButton = ({ fileUrl, fileName = "download", children = "Download Catalogue", size = "md", className = "" }: DownloadButtonProps) => {
   return (
-    <a href={fileUrl} download={fileName}>
-      <ContactButton href={fileUrl} variant="primary" size={size} icon={<Download size={20} />} isExternal={false} className={className}>
-        {children}
-      </ContactButton>
-    </a>
+    <motion.a
+      href={fileUrl}
+      download={fileName}
+      className={`flex items-center gap-2 rounded-full  transition-all duration-300 relative text-base tracking-tight font-medium overflow-hidden text-[#292929] group hover:text-white ${sizeStyles[size]} ${className}`}
+      whileHover={{
+        scale: 1.02,
+      }}
+      whileTap={{
+        scale: 0.98,
+      }}
+    >
+      {/* Black background */}
+      <span className="absolute inset-0 bg-[#E6B84F] rounded-full z-0"></span>
+
+      {/* Animation element - darker black */}
+      <span className="absolute inset-x-0 bottom-0 h-0 bg-[#292929] rounded-full z-0 transition-all duration-300 ease-in-out group-hover:h-full"></span>
+
+      {/* Content with gold text */}
+      <span className="relative z-10">{children}</span>
+      <motion.span className="relative z-10" initial={{ x: 0 }} animate={{ x: 0 }} whileHover={{ x: 3 }} transition={{ type: "spring", stiffness: 400 }}>
+        <Download size={20} />
+      </motion.span>
+    </motion.a>
   );
 };
 
