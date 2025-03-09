@@ -103,7 +103,7 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       <nav className="md:hidden absolute top-0 left-0 w-full z-50">
         {/* Top Bar */}
-        <div className="flex justify-between items-center p-4 bg-[#311717]/50">
+        <div className="flex justify-between items-center p-4 bg-transparent">
           <img src="/assets/logo.png" alt="Logo" width={150} height={75} />
 
           <button onClick={toggleMenu} className="text-white focus:outline-none" aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}>
