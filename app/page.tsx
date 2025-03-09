@@ -156,7 +156,7 @@ export default function Home() {
                 the world who need it.
               </p>
               <div className="flex justify-center md:justify-start">
-                <ContactButton href="#about" isExternal={false} variant="secondary" size="md" icon={<ChevronRight size={20} />}>
+                <ContactButton href="/assets/Fortune Cocoa Catalogue.pdf" isExternal={false} variant="secondary" size="md" icon={<ChevronRight size={20} />}>
                   Learn more
                 </ContactButton>
               </div>
@@ -202,7 +202,7 @@ export default function Home() {
           </motion.h1>
           <VanillaProductSection />
           <div className="flex justify-center mt-8">
-            <DownloadButton fileUrl="/assets/Fortune Cocoa Catalogue.pdf" fileName="Fortune Cocoa Catalogue.pdf" />
+            <DownloadButton fileUrl="/assets/vanilla/Vanilla Catalogue.pdf" fileName="Vanilla Catalogue.pdf" />
           </div>
         </motion.section>
       </motion.main>

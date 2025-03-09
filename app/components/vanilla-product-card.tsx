@@ -29,17 +29,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) 
 export default function VanillaProductSection() {
   const products: Product[] = [
     {
-      image: "/assets/vanilla/1.jpg",
+      image: "/assets/vanilla/Grade A.jpg",
       title: "Grade A Vanilla Beans - PLANIFOLIA",
       description: "Straight, No Split, Brown to Dark Brown Color. Minimum size 17cm in length",
     },
     {
-      image: "/assets/vanilla/2.jpg",
+      image: "/assets/vanilla/Grade B.jpg",
       title: "Grade B Vanilla Beans - PLANIFOLIA",
       description: "Straight , Dark Brown with Light Strips. Minimum size 15cm in length",
     },
     {
-      image: "/assets/vanilla/3.jpg",
+      image: "/assets/vanilla/Grade C.jpg",
       title: "Grade C Vanilla Beans - PLANIFOLIA",
       description: "Not Straight, Curl, Brown with Light Brown Strips. Mixed Sizes",
     },
