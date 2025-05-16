@@ -13,25 +13,30 @@ interface NavLinkProps {
   className?: string;
 }
 
-// NavLink component with TypeScript typing and smooth scrolling
+// NavLink component with TypeScript typing and proper navigation handling
 const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onClick, className = "" }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+    // Only prevent default for hash links (internal section navigation)
+    const isHashLink = href.startsWith("#");
 
-    // Get the section ID from the href
-    const sectionId = href.replace("#", "");
-    const element = document.getElementById(sectionId);
+    if (isHashLink) {
+      e.preventDefault();
 
-    if (element) {
-      // Smooth scroll to the element
-      window.scrollTo({
-        top: element.offsetTop,
-        behavior: "smooth",
-      });
+      // Get the section ID from the href
+      const sectionId = href.replace("#", "");
+      const element = document.getElementById(sectionId);
 
-      // If there's an onClick handler (like for mobile menu), call it
-      if (onClick) onClick();
+      if (element) {
+        // Smooth scroll to the element
+        window.scrollTo({
+          top: element.offsetTop,
+          behavior: "smooth",
+        });
+      }
     }
+
+    // If there's an onClick handler (like for mobile menu), call it
+    if (onClick) onClick();
   };
 
   return (
@@ -162,14 +167,6 @@ export default function Navbar() {
 
             {/* Contact Information in Mobile Menu */}
             <div className="flex flex-col items-center pt-16 pb-4">
-              {/* <a href="mailto:info@yourcompany.com" className="flex items-center space-x-2 text-white mb-2">
-                <Mail size={18} />
-                <span>info@yourcompany.com</span>
-              </a>
-              <a href="tel:+6283815242643" className="flex items-center space-x-2 text-white mb-4">
-                <Phone size={18} />
-                <span>+62 838 1524 2643</span>
-              </a> */}
               <div className="flex space-x-6 mt-2">
                 <SocialLink href="https://linkedin.com/company/yourcompany" icon={<Linkedin size={20} />} label="LinkedIn" />
                 <SocialLink href="https://facebook.com/yourcompany" icon={<Facebook size={20} />} label="Facebook" />
