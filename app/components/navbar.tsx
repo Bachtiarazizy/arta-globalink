@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, Linkedin, Menu, Phone, Send, X } from "lucide-react";
+import { ChevronRight, Linkedin, Menu, Phone, Mail, Facebook, Instagram, Twitter, X } from "lucide-react";
 import ContactButton from "./contact-button";
 
 // Define prop types for NavLink component
@@ -63,6 +63,13 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onC
   );
 };
 
+// Social icon link component
+const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string }> = ({ href, icon, label }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors" aria-label={label}>
+    {icon}
+  </a>
+);
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -73,32 +80,64 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex absolute top-6 left-0 w-full items-center justify-between px-6 sm:px-12 lg:px-24 z-50">
-        {/* Left Side */}
-        <div className="flex items-center space-x-6">
-          <ul className="flex items-center space-x-6">
-            <li>
-              <NavLink href="#home">Home</NavLink>
-            </li>
-            <li>
-              <NavLink href="#about">About</NavLink>
-            </li>
-            <li>
-              <NavLink href="#products">Product</NavLink>
-            </li>
-          </ul>
+      <div className="hidden md:block absolute top-0 left-0 w-full z-50">
+        {/* Top Section with Email and Social Links */}
+        <div className="border-b border-gray-400 px-20">
+          <div className="container mx-auto flex justify-between">
+            {/* Left Side - Contact Info with borders */}
+            <div className="flex">
+              <a href="tel:+6283815242643" className="flex items-center space-x-2 text-white text-sm px-6 py-4 border-r border-gray-400">
+                <Phone size={16} />
+                <span>+62 838 1524 2643</span>
+              </a>
+
+              <a href="mailto:connect@artaglobalink.com" className="flex items-center space-x-2 border-r border-gray-400 text-white text-sm px-6 py-4">
+                <Mail size={16} />
+                <span>connect@artaglobalink.com</span>
+              </a>
+            </div>
+
+            {/* Right Side - Hashtag and Social Links with borders */}
+            <div className="flex">
+              <span className="text-white text-sm px-6 py-4 border-r border-l border-gray-400">#MakeYourChocolate</span>
+
+              <div className="flex items-center space-x-4 px-6 py-4">
+                <SocialLink href="https://instagram.com/company" icon={<Instagram size={18} />} label="Instagram" />
+                <SocialLink href="https://twitter.com/company" icon={<X size={18} />} label="Twitter" />
+                <SocialLink href="https://facebook.com/company" icon={<Facebook size={18} />} label="Facebook" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Middle Logo */}
-        <div className="flex justify-center">
-          <img src="/assets/logo.png" alt="Logo" width={200} height={100} />
-        </div>
+        {/* Main Navigation */}
+        <nav className="flex items-center justify-between px-6 sm:px-12 lg:px-24 py-4">
+          {/* Left Side */}
+          <div className="flex items-center space-x-6">
+            <ul className="flex items-center space-x-6">
+              <li>
+                <NavLink href="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink href="/about">About</NavLink>
+              </li>
+              <li>
+                <NavLink href="/products">Products</NavLink>
+              </li>
+            </ul>
+          </div>
 
-        {/* Right Side */}
-        <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
-          Contact Us
-        </ContactButton>
-      </nav>
+          {/* Middle Logo */}
+          <div className="flex items-center justify-center">
+            <img src="/assets/logo.png" alt="Logo" width={200} height={100} />
+          </div>
+
+          {/* Right Side */}
+          <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
+            Contact Us
+          </ContactButton>
+        </nav>
+      </div>
 
       {/* Mobile Navigation */}
       <nav className="md:hidden absolute top-0 left-0 w-full z-50">
@@ -121,15 +160,33 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Menu Content Centered */}
-            <div className="flex flex-col pt-24 items-center space-y-6">
-              <NavLink href="#home" isMobile onClick={toggleMenu}>
+            {/* Contact Information in Mobile Menu */}
+            <div className="flex flex-col items-center pt-16 pb-4">
+              {/* <a href="mailto:info@yourcompany.com" className="flex items-center space-x-2 text-white mb-2">
+                <Mail size={18} />
+                <span>info@yourcompany.com</span>
+              </a>
+              <a href="tel:+6283815242643" className="flex items-center space-x-2 text-white mb-4">
+                <Phone size={18} />
+                <span>+62 838 1524 2643</span>
+              </a> */}
+              <div className="flex space-x-6 mt-2">
+                <SocialLink href="https://linkedin.com/company/yourcompany" icon={<Linkedin size={20} />} label="LinkedIn" />
+                <SocialLink href="https://facebook.com/yourcompany" icon={<Facebook size={20} />} label="Facebook" />
+                <SocialLink href="https://instagram.com/yourcompany" icon={<Instagram size={20} />} label="Instagram" />
+                <SocialLink href="https://twitter.com/yourcompany" icon={<Twitter size={20} />} label="Twitter" />
+              </div>
+            </div>
+
+            {/* Menu Content */}
+            <div className="flex flex-col items-center space-y-6 mt-4">
+              <NavLink href="/" isMobile onClick={toggleMenu}>
                 Home
               </NavLink>
-              <NavLink href="#about" isMobile onClick={toggleMenu}>
+              <NavLink href="/about" isMobile onClick={toggleMenu}>
                 About
               </NavLink>
-              <NavLink href="#products" isMobile onClick={toggleMenu}>
+              <NavLink href="/products" isMobile onClick={toggleMenu}>
                 Product
               </NavLink>
               <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>

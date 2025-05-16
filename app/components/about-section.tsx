@@ -236,7 +236,7 @@ export default function AboutSection() {
     <section ref={sectionRef} id="about" className="container mx-auto py-24 px-6 overflow-hidden">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div ref={textRef} className="space-y-8 relative">
-          <h2 ref={titleRef} className="text-4xl font-bold text-[#292929] relative inline-block">
+          <h2 ref={titleRef} className="text-4xl md:text-7xl font-bold text-[#292929] relative inline-block">
             About <span className="text-[#25D366]">Arta</span>
           </h2>
 
@@ -257,47 +257,33 @@ export default function AboutSection() {
           </div>
 
           <div className="pt-6 ml-4">
-            <button ref={buttonRef} className="bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
-              Learn More About Us
-            </button>
+            <a href="/about">
+              <button ref={buttonRef} className="bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+                Click for Company Profile
+              </button>
+            </a>
           </div>
 
           {/* Decorative elements */}
           <div className="absolute top-20 -left-10 w-20 h-20 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
         </div>
 
-        <div ref={imagesContainerRef} className="grid grid-cols-2 gap-5 relative">
-          <div className="space-y-5">
-            <div className="relative rounded-lg shadow-lg overflow-hidden" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 0)} onMouseLeave={handleImageLeave}>
-              <Image src="/assets/gallery-1.png" alt="Cocoa Beans" width={400} height={300} className="object-cover rounded-lg transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
-                <span className="font-medium">Premium Cocoa Beans</span>
-              </div>
-            </div>
-            <div className="relative rounded-lg shadow-lg overflow-hidden" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 1)} onMouseLeave={handleImageLeave}>
-              <Image src="/assets/gallery-3.png" alt="Cocoa Processing" width={400} height={300} className="object-cover rounded-lg transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
-                <span className="font-medium">Processing Facility</span>
-              </div>
+        <div ref={imagesContainerRef} className="grid grid-cols-2 gap-5 relative h-[625px]">
+          {/* Left image */}
+          <div className="relative rounded-lg shadow-lg overflow-hidden h-full" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 0)} onMouseLeave={handleImageLeave} style={{ height: "625px" }}>
+            <Image src="/assets/about.jpg" alt="Premium Cocoa Beans" width={400} height={650} className="object-cover w-full h-full rounded-lg transition-all duration-500" style={{ height: "100%", width: "100%", objectFit: "cover" }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
+              <span className="font-medium">Premium Cocoa Beans</span>
             </div>
           </div>
 
-          <div className="space-y-5 pt-8">
-            <div className="relative rounded-lg shadow-lg overflow-hidden" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 2)} onMouseLeave={handleImageLeave}>
-              <Image src="/assets/gallery-2.png" alt="Cocoa Harvesting" width={400} height={300} className="object-cover rounded-lg transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
-                <span className="font-medium">Sustainable Harvesting</span>
-              </div>
-            </div>
-            <div className="relative rounded-lg shadow-lg overflow-hidden" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 3)} onMouseLeave={handleImageLeave}>
-              <Image src="/assets/gallery-4.png" alt="Cocoa Product" width={400} height={300} className="object-cover rounded-lg transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
-                <span className="font-medium">Premium Cocoa Powder</span>
-              </div>
+          {/* Right image */}
+          <div className="relative rounded-lg shadow-lg overflow-hidden h-full" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 1)} onMouseLeave={handleImageLeave} style={{ height: "625px" }}>
+            <Image src="/assets/about-2.jpg" alt="Premium Cocoa Powder" width={400} height={650} className="object-cover w-full h-full rounded-lg transition-all duration-500" style={{ height: "100%", width: "100%", objectFit: "cover" }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-50 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-full opacity-0 hover:translate-y-0 hover:opacity-100 transition-all duration-300">
+              <span className="font-medium">Premium Cocoa Powder</span>
             </div>
           </div>
 

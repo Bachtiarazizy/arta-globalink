@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="w-full bg-[#292929] text-white py-12 sm:py-16 md:py-20 px-6 sm:px-12 lg:px-24 rounded-t-xl">
+      <footer className="w-full bg-white text-[#292929] py-12 sm:py-16 md:py-20 px-6 sm:px-12 lg:px-24 rounded-t-xl">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-3">
             {/* Logo Section */}
@@ -14,15 +14,15 @@ const Footer = () => {
                 <img src="/assets/logo.png" alt="Logo" width={200} height={100} className="max-w-[150px] sm:max-w-[200px] md:max-w-[250px]" />
               </div>
 
-              <p className="mt-6 max-w-md text-center sm:text-left text-sm sm:text-base leading-relaxed text-white">Providing the best quality of agricultural commodities and suitable as raw materials for processed products</p>
+              <p className="mt-6 max-w-md text-center sm:text-left text-sm sm:text-base leading-relaxed text-[#292929]">Providing the best quality of agricultural commodities and suitable as raw materials for processed products</p>
               <div className="flex justify-center sm:justify-start mt-6 space-x-4">
-                <a href="https://www.facebook.com/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#E6B84F] transition-colors">
+                <a href="https://www.facebook.com/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-[#292929] hover:text-[#E6B84F] transition-colors">
                   <Facebook className="w-6 h-6 sm:w-7 sm:h-7" />
                 </a>
-                <a href="https://www.instagram.com/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#E6B84F] transition-colors">
+                <a href="https://www.instagram.com/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-[#292929] hover:text-[#E6B84F] transition-colors">
                   <Instagram className="w-6 h-6 sm:w-7 sm:h-7" />
                 </a>
-                <a href="https://www.linkedin.com/company/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#E6B84F] transition-colors">
+                <a href="https://www.linkedin.com/company/artaglobalink" target="_blank" rel="noopener noreferrer" className="text-[#292929] hover:text-[#E6B84F] transition-colors">
                   <Linkedin className="w-6 h-6 sm:w-7 sm:h-7" />
                 </a>
               </div>
@@ -38,17 +38,17 @@ const Footer = () => {
                     <p className="text-base sm:text-lg font-medium text-[#E6B84F]">Company</p>
                     <ul className="mt-4 sm:mt-8 space-y-3 sm:space-y-4 text-xs sm:text-sm">
                       <li>
-                        <a className="text-white transition hover:text-white/75" href="#">
+                        <a className="text-[#292929] transition hover:text-[#292929]/75" href="#">
                           Home
                         </a>
                       </li>
                       <li>
-                        <a className="text-white transition hover:text-white/75" href="#">
+                        <a className="text-[#292929] transition hover:text-[#292929]/75" href="#">
                           About us
                         </a>
                       </li>
                       <li>
-                        <a className="text-white transition hover:text-white/75" href="#">
+                        <a className="text-[#292929] transition hover:text-[#292929]/75" href="#">
                           Products
                         </a>
                       </li>
@@ -60,12 +60,12 @@ const Footer = () => {
                     <p className="text-base sm:text-lg font-medium text-[#E6B84F]">Downloads</p>
                     <ul className="mt-4 sm:mt-8 space-y-3 sm:space-y-4 text-xs sm:text-sm">
                       <li>
-                        <a className="text-white transition hover:text-white/75" href="/assets/cocoa/Fortune Cocoa Powder Catalogue.pdf" download>
+                        <a className="text-[#292929] transition hover:text-[#292929]/75" href="/assets/cocoa/Fortune Cocoa Powder Catalogue.pdf" download>
                           Cacao Catalog
                         </a>
                       </li>
                       <li>
-                        <a className="text-white transition hover:text-white/75" href="/assets/vanilla/Vanilla Catalogue.pdf" download>
+                        <a className="text-[#292929] transition hover:text-[#292929]/75" href="/assets/vanilla/Vanilla Catalogue.pdf" download>
                           Vanilla Catalog
                         </a>
                       </li>
@@ -82,7 +82,7 @@ const Footer = () => {
                         <span className="mr-2">
                           <MailCheck className="w-5 h-5 sm:w-6 sm:h-6" />
                         </span>
-                        <span className="text-white">connect@artaglobalink.com</span>
+                        <span className="text-[#292929]">connect@artaglobalink.com</span>
                       </a>
                     </li>
                     <li>
@@ -90,7 +90,7 @@ const Footer = () => {
                         <span className="mr-2">
                           <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                         </span>
-                        <span className="text-white">+6283815242643</span>
+                        <span className="text-[#292929]">+6283815242643</span>
                       </a>
                     </li>
                     <li>
@@ -98,7 +98,7 @@ const Footer = () => {
                         <span className="mr-2 mt-1">
                           <MapPinCheck className="w-5 h-5 sm:w-6 sm:h-6" />
                         </span>
-                        <span className="text-white">JL. Nenas Raya no. 39B rt/rw 01/05 kel. Cibodasari kec. Cibodas Kota Tangerang Banten 15138. Indonesia</span>
+                        <span className="text-[#292929]">JL. Nenas Raya no. 39B rt/rw 01/05 kel. Cibodasari kec. Cibodas Kota Tangerang Banten 15138. Indonesia</span>
                       </a>
                     </li>
                   </ul>

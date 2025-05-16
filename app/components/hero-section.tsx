@@ -33,7 +33,7 @@ export default function Hero() {
       heading.addEventListener("mouseenter", () => {
         gsap.to(heading, {
           letterSpacing: "2px",
-          color: "#25D366",
+          color: "#F5EEDD",
           duration: 0.5,
         });
       });
@@ -161,7 +161,7 @@ export default function Hero() {
 
       <div className="hero-content relative z-10 text-center px-6 max-w-4xl">
         <h1 ref={headingRef} className="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300 cursor-default">
-          We Supply Around <span className="text-[#25D366]">the World</span>
+          We Supply Around <span className="text-[#F5EEDD]">the World</span>
         </h1>
 
         <p ref={paragraphRef} className="text-xl mb-8 max-w-3xl mx-auto">
@@ -170,7 +170,7 @@ export default function Hero() {
         </p>
 
         <div ref={buttonsRef} className="space-x-4">
-          <button className="bg-[#25D366] text-white px-8 py-3 rounded-full hover:bg-opacity-80 transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e, 1.15)} onMouseLeave={handleButtonLeave}>
+          <button className="bg-[#F5EEDD] text-[#292929] px-8 py-3 rounded-full hover:bg-opacity-80 transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e, 1.15)} onMouseLeave={handleButtonLeave}>
             <span className="relative z-10">Order Now</span>
           </button>
 

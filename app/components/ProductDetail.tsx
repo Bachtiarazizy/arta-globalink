@@ -1,0 +1,384 @@
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import gsap from "gsap";
+
+type Product = {
+  id: number;
+  name: string;
+  category: string;
+  image: string;
+  shortDesc: string;
+  featured: boolean;
+  origin: string;
+};
+
+type ProductDetailProps = {
+  product: Product | undefined;
+  relatedProducts: Product[];
+};
+
+export default function ProductDetail({ product, relatedProducts }: ProductDetailProps) {
+  const router = useRouter();
+
+  // References for animations
+  const pageRef = useRef<HTMLDivElement>(null);
+  const productImageRef = useRef<HTMLDivElement>(null);
+  const productInfoRef = useRef<HTMLDivElement>(null);
+  const relatedProductsRef = useRef<HTMLDivElement>(null);
+  const productRefs = useRef<HTMLDivElement[]>([]);
+
+  // Reset product refs array
+  productRefs.current = [];
+
+  // Helper function to add elements to refs
+  const addToProductRefs = (el: HTMLDivElement | null) => {
+    if (el && !productRefs.current.includes(el)) {
+      productRefs.current.push(el);
+    }
+  };
+
+  // If product not found, handle it
+  if (!product) {
+    // Redirect to products page if product is not found
+    useEffect(() => {
+      router.push("/products");
+    }, [router]);
+
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-600">Product not found. Redirecting...</p>
+      </div>
+    );
+  }
+
+  // Product hover animation
+  const handleProductHover = (e: React.MouseEvent<HTMLDivElement>) => {
+    gsap.to(e.currentTarget, {
+      y: -10,
+      boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
+      duration: 0.3,
+    });
+
+    gsap.to(e.currentTarget.querySelector(".product-image"), {
+      scale: 1.05,
+      duration: 0.4,
+    });
+
+    gsap.to(e.currentTarget.querySelector(".product-badge"), {
+      scale: 1.1,
+      duration: 0.3,
+    });
+  };
+
+  const handleProductLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    gsap.to(e.currentTarget, {
+      y: 0,
+      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
+      duration: 0.3,
+    });
+
+    gsap.to(e.currentTarget.querySelector(".product-image"), {
+      scale: 1,
+      duration: 0.4,
+    });
+
+    gsap.to(e.currentTarget.querySelector(".product-badge"), {
+      scale: 1,
+      duration: 0.3,
+    });
+  };
+
+  // Animations
+  useEffect(() => {
+    // Product image animation
+    if (productImageRef.current) {
+      gsap.fromTo(
+        productImageRef.current,
+        { x: -50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+    }
+
+    // Product info animation
+    if (productInfoRef.current) {
+      gsap.fromTo(
+        productInfoRef.current.children,
+        { x: 50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+    }
+
+    // Related products animation
+    if (relatedProductsRef.current && productRefs.current.length > 0) {
+      gsap.fromTo(
+        productRefs.current,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          duration: 0.6,
+          delay: 0.5,
+          ease: "back.out(1.2)",
+        }
+      );
+    }
+  }, [product.id]);
+
+  // Description - expanded version of shortDesc
+  const productDescriptions: { [key: string]: string } = {
+    "cocoa-powder":
+      "Our premium cocoa powder is carefully processed to preserve the rich flavors and aromas of the cocoa bean. Sourced from sustainable farms in Indonesia, this powder is perfect for baking, hot chocolate, and various culinary applications. The fine texture ensures smooth incorporation into your recipes, while the deep cocoa notes elevate your creations.",
+    "cocoa-butter":
+      "Pure, unrefined cocoa butter extracted through a careful pressing process. Our cocoa butter maintains its natural scent and nutritional properties, making it ideal for both culinary applications and cosmetic products. It melts at body temperature, making it perfect for chocolate making and skin care formulations.",
+    "cocoa-nibs":
+      "These crunchy cocoa nibs are minimally processed pieces of fermented and roasted cocoa beans. They retain all the natural antioxidants and nutrients of the cocoa bean, offering a healthy alternative to processed chocolate. With their slightly bitter taste and crunchy texture, they make excellent toppings for desserts, smoothies, and baked goods.",
+    "cocoa-liquor":
+      "Also known as cocoa mass, our cocoa liquor is made by finely grinding fermented cocoa beans. It contains both cocoa solids and cocoa butter in their natural proportions, making it the foundation for all chocolate products. Professional chocolatiers value our cocoa liquor for its balanced flavor profile and smooth consistency.",
+    "by-products":
+      "Sustainable cocoa by-products that showcase our commitment to zero-waste processing. These husks can be used for garden mulching, brewing cocoa tea, or as an eco-friendly craft material. By utilizing these by-products, you contribute to a more sustainable cocoa industry while enjoying their unique benefits.",
+  };
+
+  // Default description if category-specific one doesn't exist
+  const productDescription =
+    productDescriptions[product.category] ||
+    "This high-quality cocoa product is part of our premium range sourced from sustainable farms in Indonesia. Processed with care to meet international standards, it offers excellent value for both professional and home use.";
+
+  // Product specifications
+  const specifications = [
+    {
+      label: "Category",
+      value: product.category
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+    },
+    { label: "Origin", value: product.origin },
+  ];
+
+  const technicalSpecifications = [
+    { label: "pH", value: "5.4 - 6.7" },
+    { label: "Flavor", value: "Nice Cocoa Taste" },
+    { label: "Fat Content", value: "10-12%" },
+    { label: "Ash Content", value: "8% Max" },
+    { label: "Fineness", value: "(+/-) 99% <75μm" },
+    { label: "Moisture", value: "5.0% Max" },
+    { label: "Shell Content", value: "1.5% Max" },
+    { label: "Application", value: "Chocolate, Ice Cream, Fillings, Cakes, Cookies" },
+    { label: "MOQ", value: "26 MT in a 40ft container" },
+  ];
+
+  return (
+    <div ref={pageRef} className="min-h-screen bg-gray-50">
+      {/* Breadcrumb */}
+
+      <div
+        className="relative h-64 flex items-center justify-center pt-12 md:pt-16 lg:pt-60 pb-36 text-white"
+        style={{
+          backgroundImage: 'url("/assets/hero.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+          <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">{product.shortDesc}</p>
+          <div className="flex items-center justify-center space-x-2">
+            <Link href="/" className="text-gray-300 hover:text-white transition-colors">
+              Home
+            </Link>
+            <span className="text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+            <Link href="/products" className="text-gray-300 hover:text-white transition-colors">
+              Products
+            </Link>
+            <span className="text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+            <span className="text-[#25D366]">{product.name}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Product Detail Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Product Image */}
+            <div ref={productImageRef} className="bg-white rounded-xl shadow-md p-8 flex items-center justify-center">
+              <div className="relative w-full h-96">
+                <Image src={product.image} alt={product.name} fill style={{ objectFit: "contain" }} className="product-image transition-all duration-500" />
+                {product.featured && <div className="product-badge absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold px-3 py-1 rounded-full">Featured</div>}
+              </div>
+            </div>
+
+            {/* Product Information */}
+            <div ref={productInfoRef} className="flex flex-col justify-center">
+              <h1 className="text-4xl font-bold text-[#292929] mb-4">{product.name}</h1>
+
+              <div className="flex items-center mb-6">
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <span>•</span>
+                  <span>{product.origin}</span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 mb-8">{productDescription}</p>
+
+              {/* General Product Info */}
+              <div className="bg-gray-100 rounded-lg p-6 mb-6">
+                <h3 className="text-lg font-bold text-[#292929] mb-4">Product Information</h3>
+                <div className="space-y-3">
+                  {specifications.map((spec, index) => (
+                    <div key={index} className="flex justify-between">
+                      <span className="text-gray-600">{spec.label}</span>
+                      <span className="font-medium text-[#292929]">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Technical Specifications */}
+              <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+                <h3 className="text-lg font-bold text-[#292929] mb-4">Technical Specifications</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {technicalSpecifications.map((spec, index) => (
+                    <div key={index} className="border-b border-gray-100 pb-2">
+                      <span className="text-gray-600 text-sm block">{spec.label}</span>
+                      <span className="font-medium text-[#292929]">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center">
+                  <div className="w-3 h-3 rounded-full bg-[#25D366] mr-2"></div>
+                  <span className="text-sm text-gray-600">All specifications tested according to international standards</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Information Tabs */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-center text-[#292929] mb-8">Product Information</h2>
+
+            <div className="bg-gray-50 rounded-xl p-8">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div>
+                  <h3 className="text-xl font-bold text-[#292929] mb-4">Description</h3>
+                  <p className="text-gray-600 mb-4">{productDescription}</p>
+                  <p className="text-gray-600">
+                    Our products are ethically sourced from partner farms in Indonesia, ensuring fair compensation for farmers and sustainable agricultural practices. Each batch undergoes rigorous quality control to meet international
+                    standards.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-[#292929] mb-4">Usage & Storage</h3>
+                  <ul className="space-y-3 text-gray-600">
+                    <li className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      Store in a cool, dry place away from direct sunlight
+                    </li>
+                    <li className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      Keep sealed in original packaging for maximum freshness
+                    </li>
+                    <li className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      Best used within 12 months of production date
+                    </li>
+                    <li className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      See packaging for specific usage instructions
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <h2 className="text-3xl font-bold text-center text-[#292929] mb-12">Related Products</h2>
+
+            <div ref={relatedProductsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {relatedProducts.map((relatedProduct) => (
+                <Link href={`/products/${relatedProduct.id}`} key={relatedProduct.id} passHref>
+                  <div ref={addToProductRefs} className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer" onMouseEnter={handleProductHover} onMouseLeave={handleProductLeave}>
+                    <div className="relative">
+                      <div className="h-48 overflow-hidden">
+                        <div className="product-image transition-all duration-500 transform">
+                          <Image src={relatedProduct.image} alt={relatedProduct.name} width={400} height={300} className="w-full h-48 object-cover" />
+                        </div>
+                      </div>
+
+                      {relatedProduct.featured && <div className="product-badge absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold px-3 py-1 rounded-full transform transition-transform duration-300">Featured</div>}
+                    </div>
+
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-[#292929] mb-1">{relatedProduct.name}</h3>
+                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">{relatedProduct.shortDesc}</p>
+
+                      <div className="flex justify-between items-center"></div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Back to Products */}
+      <section className="py-12 bg-[#F9F9F9]">
+        <div className="container mx-auto px-6 text-center">
+          <Link href="/products" passHref>
+            <button className="inline-flex items-center text-[#292929] font-medium hover:text-[#25D366] transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+              </svg>
+              Back to all products
+            </button>
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}

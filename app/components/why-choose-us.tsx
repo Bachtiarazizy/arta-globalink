@@ -234,27 +234,11 @@ export default function WhyChooseUs() {
     },
     {
       icon: "🏆",
-      title: "Commitment To Highest Quality Cocoa",
-    },
-    {
-      icon: "🤝",
-      title: "Your Dedicated Partner With End to End Support",
-    },
-    {
-      icon: "🌎",
-      title: "Global Reach with Local Expertise",
+      title: "Highest Quality of Cocoa",
     },
     {
       icon: "♻️",
       title: "Transparency and Sustainability",
-    },
-    {
-      icon: "🍫",
-      title: "One Stop Solution for Cocoa and Derivatives",
-    },
-    {
-      icon: "🔄",
-      title: "Securing Cocoa Supply With Long Term Partnership",
     },
   ];
 
@@ -323,7 +307,7 @@ export default function WhyChooseUs() {
   };
 
   return (
-    <section ref={sectionRef} id="why-choose-us" className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section ref={sectionRef} id="why-choose-us" className="py-24 bg[#F5EEDD] overflow-hidden">
       <div className="container mx-auto px-6 relative">
         {/* Decorative elements */}
         <div className="absolute top-0 right-10 w-20 h-20 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
@@ -373,7 +357,7 @@ export default function WhyChooseUs() {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:scale-105 shadow-md hover:shadow-lg font-medium"
             onMouseEnter={(e) => {
               gsap.to(e.target, {

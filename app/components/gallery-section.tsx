@@ -210,16 +210,16 @@ export default function Gallery() {
 
   // Gallery image data
   const galleryImages = [
-    { src: "/assets/gallery-1.png", alt: "Premium Cocoa Beans", caption: "Premium Cocoa Beans" },
-    { src: "/assets/gallery-2.png", alt: "Sustainable Harvesting", caption: "Sustainable Harvesting" },
-    { src: "/assets/gallery-3.png", alt: "Processing Facility", caption: "Our Modern Processing Facility" },
-    { src: "/assets/gallery-4.png", alt: "Cocoa Powder", caption: "Premium Cocoa Powder" },
-    { src: "/assets/gallery-5.png", alt: "Quality Control", caption: "Quality Control Process" },
-    { src: "/assets/gallery-6.png", alt: "Finished Products", caption: "Finished Cocoa Products" },
+    { src: "/assets/gallery/gallery-1.jpg", alt: "Premium Cocoa Beans", caption: "Premium Cocoa Beans" },
+    { src: "/assets/gallery/gallery-2.jpg", alt: "Sustainable Harvesting", caption: "Sustainable Harvesting" },
+    { src: "/assets/gallery/gallery-3.jpg", alt: "Processing Facility", caption: "Our Modern Processing Facility" },
+    { src: "/assets/gallery/gallery-4.jpg", alt: "Cocoa Powder", caption: "Premium Cocoa Powder" },
+    { src: "/assets/gallery/gallery-5.jpg", alt: "Quality Control", caption: "Quality Control Process" },
+    { src: "/assets/gallery/gallery-6.jpg", alt: "Finished Products", caption: "Finished Cocoa Products" },
   ];
 
   return (
-    <section ref={sectionRef} id="gallery" className="bg-gray-50 py-24 relative overflow-hidden">
+    <section ref={sectionRef} id="gallery" className="bg-white py-24 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#25D366] bg-opacity-5"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-[#25D366] bg-opacity-5"></div>

@@ -9,7 +9,7 @@ import Certifications from "./components/certifications";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-[#F5EEDD]">
       <Head>
         <title>Arta Globalink - Premium Cocoa Powder</title>
         <meta name="description" content="Premium quality cocoa powder from Arta Globalink" />

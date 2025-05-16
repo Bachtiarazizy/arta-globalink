@@ -183,7 +183,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section ref={sectionRef} id="certifications" className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden relative">
+    <section ref={sectionRef} id="certifications" className="py-24 bg-[#F5EEDD] overflow-hidden relative">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
       <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full border-4 border-[#25D366] border-opacity-10 z-0"></div>
@@ -208,15 +208,6 @@ export default function Certifications() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 flex justify-center">
-          <div className="inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer group">
-            <span className="text-[#292929] font-medium group-hover:text-[#25D366] transition-all duration-300">View All Certifications</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] transform group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
         </div>
       </div>
     </section>
