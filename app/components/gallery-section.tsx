@@ -221,15 +221,15 @@ export default function Gallery() {
   return (
     <section ref={sectionRef} id="gallery" className="bg-white py-24 relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#25D366] bg-opacity-5"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-[#25D366] bg-opacity-5"></div>
-      <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-[#25D366] border-opacity-20"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#592F1F] bg-opacity-5"></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-[#592F1F] bg-opacity-5"></div>
+      <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-[#592F1F] border-opacity-20"></div>
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 relative">
           <h2 ref={titleRef} className="text-4xl font-bold text-[#292929] relative inline-block">
-            Our <span className="text-[#25D366]">Gallery</span>
-            <div ref={underlineRef} className="absolute bottom-[-8px] left-0 w-full h-1 bg-[#25D366]"></div>
+            Our <span className="text-[#592F1F]">Gallery</span>
+            <div ref={underlineRef} className="absolute bottom-[-8px] left-0 w-full h-1 bg-[#592F1F]"></div>
           </h2>
           <p ref={descriptionRef} className="text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
             Take a visual journey through our cocoa processing facilities and see our dedication to quality in action. From bean to powder, we ensure excellence at every step.
@@ -251,24 +251,20 @@ export default function Gallery() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
               <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 w-full">
-                <h3 className="font-medium text-lg">{image.caption}</h3>
-                <div className="h-1 w-10 bg-[#25D366] mt-2 rounded-full"></div>
+                <div className="h-1 w-10 bg-[#592F1F] mt-2 rounded-full"></div>
               </div>
             </div>
           ))}
         </div>
 
         {/* View more button with animation */}
-        <div className="text-center mt-12">
-          <button className="bg-[#25D366] text-white px-8 py-3 rounded-full hover:bg-[#1eb058] transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">View More Images</button>
-        </div>
       </div>
 
       {/* Lightbox functionality */}
       {selectedImage !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={closeLightbox}>
           <div className="relative max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
-            <button className="absolute top-4 right-4 text-white bg-[#25D366] rounded-full w-10 h-10 flex items-center justify-center z-10" onClick={closeLightbox}>
+            <button className="absolute top-4 right-4 text-white bg-[#592F1F] rounded-full w-10 h-10 flex items-center justify-center z-10" onClick={closeLightbox}>
               ✕
             </button>
             <div className="bg-white p-4 rounded-lg shadow-2xl">

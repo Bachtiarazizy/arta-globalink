@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, Linkedin, Menu, Phone, Mail, Facebook, Instagram, Twitter, X } from "lucide-react";
+import { ChevronRight, Linkedin, Menu, Phone, Mail, Facebook, Instagram, Twitter, X, ChevronDown } from "lucide-react";
 import ContactButton from "./contact-button";
 
 // Define prop types for NavLink component
@@ -11,11 +11,61 @@ interface NavLinkProps {
   isMobile?: boolean;
   onClick?: () => void;
   className?: string;
+  hasDropdown?: boolean;
 }
 
+// Define prop types for dropdown
+interface DropdownProps {
+  isOpen: boolean;
+  items: {
+    href: string;
+    label: string;
+  }[];
+  onItemClick?: () => void;
+}
+
+// Dropdown component
+const Dropdown: React.FC<DropdownProps> = ({ isOpen, items, onItemClick }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="absolute top-full left-0 bg-[#311717] py-2 min-w-[200px] shadow-lg z-50">
+      {items.map((item, index) => (
+        <a key={index} href={item.href} onClick={onItemClick} className="block px-4 py-2 text-white hover:bg-white/10 transition-colors text-sm whitespace-nowrap">
+          {item.label}
+        </a>
+      ))}
+    </div>
+  );
+};
+
 // NavLink component with TypeScript typing and proper navigation handling
-const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onClick, className = "" }) => {
+const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onClick, className = "", hasDropdown = false }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // If it has dropdown, toggle dropdown instead of navigating
+    if (hasDropdown) {
+      e.preventDefault();
+      setDropdownOpen(!dropdownOpen);
+      return;
+    }
+
     // Only prevent default for hash links (internal section navigation)
     const isHashLink = href.startsWith("#");
 
@@ -39,32 +89,58 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, isMobile = false, onC
     if (onClick) onClick();
   };
 
+  // Product dropdown items
+  const productItems = [
+    { href: "/products/type/natural", label: "Natural Cocoa Products" },
+    { href: "/products/type/alkalized", label: "Alkalized Cocoa Products" },
+    { href: "/products/type/black", label: "Black Cocoa Products" },
+  ];
+
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      className={`
-        font-medium 
-        relative 
-        group
-        ${isMobile ? "text-2xl text-white block text-center py-3" : "text-white"}
-        ${className}
-      `}
-    >
-      {children}
-      <span
+    <div className="relative" ref={dropdownRef}>
+      <a
+        href={href}
+        onClick={handleClick}
         className={`
-          absolute 
-          bottom-0 
-          left-0 
-          h-0.5 
-          bg-white 
-          transition-all 
-          duration-300 
-          ${isMobile ? "w-0 group-hover:w-full" : "w-0 group-hover:w-full"}
+          font-medium 
+          relative 
+          group
+          ${isMobile ? "text-2xl text-white block text-center py-3" : "text-white"}
+          ${hasDropdown ? "flex items-center" : ""}
+          ${className}
         `}
-      ></span>
-    </a>
+      >
+        {children}
+        {hasDropdown && !isMobile && <ChevronDown size={16} className={`ml-1 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />}
+        <span
+          className={`
+            absolute 
+            bottom-0 
+            left-0 
+            h-0.5 
+            bg-white 
+            transition-all 
+            duration-300 
+            ${isMobile ? "w-0 group-hover:w-full" : "w-0 group-hover:w-full"}
+          `}
+        ></span>
+      </a>
+
+      {hasDropdown && !isMobile && <Dropdown isOpen={dropdownOpen} items={productItems} onItemClick={() => setDropdownOpen(false)} />}
+    </div>
+  );
+};
+
+// Mobile dropdown menu component
+const MobileDropdown: React.FC<{ items: { href: string; label: string }[]; onItemClick?: () => void }> = ({ items, onItemClick }) => {
+  return (
+    <div className="flex flex-col ml-6 mt-2">
+      {items.map((item, index) => (
+        <a key={index} href={item.href} className="text-white text-xl py-2" onClick={onItemClick}>
+          {item.label}
+        </a>
+      ))}
+    </div>
   );
 };
 
@@ -77,10 +153,24 @@ const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string 
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
     setIsMenuOpen((prev) => !prev);
+    setMobileProductsOpen(false); // Reset submenu when closing main menu
   };
+
+  const toggleMobileProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileProductsOpen((prev) => !prev);
+  };
+
+  // Product dropdown items
+  const productItems = [
+    { href: "/products/type/natural", label: "Natural Cocoa Products" },
+    { href: "/products/type/alkalized", label: "Alkalized Cocoa Products" },
+    { href: "/products/type/black", label: "Black Cocoa Products" },
+  ];
 
   return (
     <>
@@ -127,7 +217,9 @@ export default function Navbar() {
                 <NavLink href="/about">About</NavLink>
               </li>
               <li>
-                <NavLink href="/products">Products</NavLink>
+                <NavLink href="/products" hasDropdown>
+                  Products
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -138,7 +230,7 @@ export default function Navbar() {
           </div>
 
           {/* Right Side */}
-          <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
+          <ContactButton href="/contact" variant="primary" size="md" icon={<ChevronRight size={20} />}>
             Contact Us
           </ContactButton>
         </nav>
@@ -183,10 +275,27 @@ export default function Navbar() {
               <NavLink href="/about" isMobile onClick={toggleMenu}>
                 About
               </NavLink>
-              <NavLink href="/products" isMobile onClick={toggleMenu}>
-                Product
-              </NavLink>
-              <ContactButton href="https://wa.me/6283815242643" variant="primary" size="md" icon={<ChevronRight size={20} />}>
+
+              {/* Products with dropdown for mobile */}
+              <div className="flex flex-col items-center">
+                <a href="#" onClick={toggleMobileProducts} className="text-2xl text-white flex items-center py-3">
+                  Products
+                  <ChevronDown size={20} className={`ml-2 transition-transform ${mobileProductsOpen ? "rotate-180" : ""}`} />
+                </a>
+
+                {/* Mobile dropdown items */}
+                {mobileProductsOpen && (
+                  <div className="flex flex-col items-center space-y-3 mt-2">
+                    {productItems.map((item, index) => (
+                      <a key={index} href={item.href} className="text-xl text-white opacity-80 hover:opacity-100" onClick={toggleMenu}>
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <ContactButton href="/contact" variant="primary" size="md" icon={<ChevronRight size={20} />}>
                 Contact Us
               </ContactButton>
             </div>

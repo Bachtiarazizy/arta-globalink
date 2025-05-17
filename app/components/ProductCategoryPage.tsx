@@ -10,7 +10,6 @@ type Product = {
   type?: string;
   image: string;
   shortDesc: string;
-  featured: boolean;
 
   origin: string;
 };
@@ -53,7 +52,7 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </span>
-            <span className="text-[#25D366]">{categoryTitle}</span>
+            <span className="text-[#E6B84F]">{categoryTitle}</span>
           </div>
         </div>
       </div>
@@ -66,7 +65,6 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className="relative h-64 bg-gray-200">
                     <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
-                    {product.featured && <div className="absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold uppercase py-1 px-3 rounded-full">Featured</div>}
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h3>
@@ -81,7 +79,7 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
           <div className="text-center py-16">
             <h3 className="text-xl text-gray-500">No products found in this category</h3>
             <Link href="/products">
-              <button className="mt-6 bg-[#25D366] text-white px-6 py-2 rounded-md hover:bg-[#1eb058] transition-colors">View All Products</button>
+              <button className="mt-6 bg-[#592F1F] text-white px-6 py-2 rounded-md hover:bg-[#1eb058] transition-colors">View All Products</button>
             </Link>
           </div>
         )}

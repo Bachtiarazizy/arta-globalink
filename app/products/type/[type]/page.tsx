@@ -10,7 +10,6 @@ type Product = {
   type?: string; // Added type property
   image: string;
   shortDesc: string;
-  featured: boolean;
   origin: string;
 };
 

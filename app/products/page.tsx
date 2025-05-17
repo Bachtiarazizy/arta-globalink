@@ -18,7 +18,6 @@ type Product = {
   category: string;
   image: string;
   shortDesc: string;
-  featured: boolean;
   origin: string;
 };
 
@@ -212,7 +211,7 @@ export default function ProductsPage() {
       buttons.forEach((button) => {
         if (button.getAttribute("data-filter") === filter) {
           gsap.to(button, {
-            backgroundColor: "#25D366",
+            backgroundColor: "#592F1F",
             color: "#ffffff",
             paddingLeft: "20px",
             paddingRight: "20px",
@@ -257,7 +256,7 @@ export default function ProductsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </span>
-            <span className="text-[#25D366]">Products</span>
+            <span className="text-[#E6B84F]">Products</span>
           </div>
         </div>
       </div>
@@ -270,7 +269,7 @@ export default function ProductsPage() {
               <button
                 key={filter.id}
                 data-filter={filter.id}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter.id ? "bg-[#25D366] text-white" : "bg-white text-[#292929] hover:bg-gray-100"}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter.id ? "bg-[#592F1F] text-white" : "bg-white text-[#292929] hover:bg-gray-100"}`}
                 onClick={() => handleFilterClick(filter.id)}
               >
                 {filter.label}
@@ -293,8 +292,6 @@ export default function ProductsPage() {
                         <Image src={product.image} alt={product.name} width={400} height={300} className="w-full h-64 object-cover" />
                       </div>
                     </div>
-
-                    {product.featured && <div className="product-badge absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold px-3 py-1 rounded-full transform transition-transform duration-300">Featured</div>}
                   </div>
 
                   <div className="p-6">
@@ -319,8 +316,8 @@ export default function ProductsPage() {
         <div className="container mx-auto px-6">
           <div className="bg-[#292929] rounded-2xl p-12 text-white relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
-              <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-[#25D366] opacity-10"></div>
-              <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[#25D366] opacity-5"></div>
+              <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-[#592F1F] opacity-10"></div>
+              <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[#592F1F] opacity-5"></div>
             </div>
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
@@ -329,7 +326,7 @@ export default function ProductsPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <input type="email" placeholder="Enter your email address" className="px-6 py-3 rounded-full text-gray-800 w-full sm:w-auto sm:flex-grow max-w-md" />
-                <button className="bg-[#25D366] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 transform hover:scale-105">Subscribe</button>
+                <button className="bg-[#592F1F] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 transform hover:scale-105">Subscribe</button>
               </div>
             </div>
           </div>
@@ -345,7 +342,7 @@ export default function ProductsPage() {
           </div>
 
           <div className="flex justify-center">
-            <button className="bg-[#25D366] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 flex items-center gap-2">
+            <button className="bg-[#592F1F] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>

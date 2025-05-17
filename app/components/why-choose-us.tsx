@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -16,12 +17,12 @@ export default function WhyChooseUs() {
   const underlineRef = useRef(null);
   const descriptionRef = useRef(null);
   const featureCardsRef = useRef<HTMLDivElement[]>([]);
-  const featureIconsRef = useRef<HTMLDivElement[]>([]);
-  const featureTitlesRef = useRef<HTMLDivElement[]>([]);
+  const featureImagesRef = useRef<HTMLDivElement[]>([]);
+  const featureTitlesRef = useRef<HTMLHeadingElement[]>([]);
 
   // Clear refs arrays on each render
   featureCardsRef.current = [];
-  featureIconsRef.current = [];
+  featureImagesRef.current = [];
   featureTitlesRef.current = [];
 
   // Add to refs functions
@@ -31,13 +32,13 @@ export default function WhyChooseUs() {
     }
   };
 
-  const addToFeatureIconsRef = (el: HTMLDivElement | null) => {
-    if (el && !featureIconsRef.current.includes(el)) {
-      featureIconsRef.current.push(el);
+  const addToFeatureImagesRef = (el: HTMLDivElement | null) => {
+    if (el && !featureImagesRef.current.includes(el)) {
+      featureImagesRef.current.push(el);
     }
   };
 
-  const addToFeatureTitlesRef = (el: HTMLDivElement | null) => {
+  const addToFeatureTitlesRef = (el: HTMLHeadingElement | null) => {
     if (el && !featureTitlesRef.current.includes(el)) {
       featureTitlesRef.current.push(el);
     }
@@ -104,29 +105,23 @@ export default function WhyChooseUs() {
       }
     );
 
-    // Feature cards animation - grid reveal pattern
+    // Feature cards animation - simple fade in
     featureCardsRef.current.forEach((card, index) => {
-      // Calculate row and column (assuming 4 columns)
-      const row = Math.floor(index / 4);
-      const col = index % 4;
-
-      // Calculate delay based on position (diagonal wave effect)
-      const delay = 0.1 * (row + col);
+      // Calculate delay based on position
+      const delay = 0.1 * index;
 
       gsap.fromTo(
         card,
         {
-          y: 50,
+          y: 30,
           opacity: 0,
-          scale: 0.9,
         },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 0.7,
+          duration: 0.6,
           delay: delay,
-          ease: "back.out(1.2)",
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
             start: "top 90%",
@@ -136,20 +131,20 @@ export default function WhyChooseUs() {
       );
     });
 
-    // Icon animations - rotate and bounce
-    featureIconsRef.current.forEach((icon, index) => {
+    // Image animations - simple scale
+    featureImagesRef.current.forEach((image, index) => {
       gsap.fromTo(
-        icon,
+        image,
         {
-          scale: 0,
-          rotation: -30,
+          scale: 0.8,
+          opacity: 0,
         },
         {
           scale: 1,
-          rotation: 0,
-          duration: 0.8,
-          delay: 0.3 + index * 0.05,
-          ease: "elastic.out(1, 0.5)",
+          opacity: 1,
+          duration: 0.6,
+          delay: 0.3 + index * 0.1,
+          ease: "back.out(1.2)",
           scrollTrigger: {
             trigger: featureCardsRef.current[index],
             start: "top 85%",
@@ -164,14 +159,14 @@ export default function WhyChooseUs() {
       gsap.fromTo(
         title,
         {
-          y: 20,
+          y: 15,
           opacity: 0,
         },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          delay: 0.5 + index * 0.05,
+          duration: 0.5,
+          delay: 0.4 + index * 0.1,
           scrollTrigger: {
             trigger: featureCardsRef.current[index],
             start: "top 85%",
@@ -187,197 +182,99 @@ export default function WhyChooseUs() {
     };
   }, []);
 
-  // Card hover animation
+  // Simple card hover animation
   const handleCardHover = (index: number) => {
     gsap.to(featureCardsRef.current[index], {
-      y: -10,
-      boxShadow: "0 15px 30px rgba(37, 211, 102, 0.15)",
-      borderTopWidth: "6px",
+      y: -5,
+      boxShadow: "0 10px 20px rgba(89, 47, 31, 0.1)",
       duration: 0.3,
     });
 
-    // Icon animation on hover
-    gsap.to(featureIconsRef.current[index], {
-      scale: 1.1,
-      rotation: 5,
-      backgroundColor: "#f0faf0", // Light green background
-      duration: 0.4,
+    // Image animation on hover
+    gsap.to(featureImagesRef.current[index], {
+      scale: 1.05,
+      duration: 0.3,
     });
   };
 
   const handleCardLeave = (index: number) => {
     gsap.to(featureCardsRef.current[index], {
       y: 0,
-      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
-      borderTopWidth: "4px",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
       duration: 0.3,
     });
 
-    // Reset icon on leave
-    gsap.to(featureIconsRef.current[index], {
+    // Reset image on leave
+    gsap.to(featureImagesRef.current[index], {
       scale: 1,
-      rotation: 0,
-      backgroundColor: "#f9fafb", // Light gray background
-      duration: 0.4,
+      duration: 0.3,
     });
   };
 
-  // WhyChooseUs data with improved icons
+  // WhyChooseUs data with image paths
   const whyChooseUs = [
     {
-      icon: "🌱",
-      title: "Custom Solutions For Every Industry Needs",
+      image: "/assets/5.png",
+      title: "One stop solution for cocoa and dericative",
     },
     {
-      icon: "💰",
-      title: "Competitive and Flexible Pricing Models",
+      image: "/assets/6.png",
+      title: "Custom solutions for every industry needs",
     },
     {
-      icon: "🏆",
-      title: "Highest Quality of Cocoa",
+      image: "/assets/7.png",
+      title: "Custom solutions for every industry needs",
     },
     {
-      icon: "♻️",
-      title: "Transparency and Sustainability",
+      image: "/assets/8.png",
+      title: "Transparency and sustainability",
     },
   ];
 
-  // Custom iconComponents for a more professional look
-  const iconComponents = {
-    "🌱": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M12 2L12 9"></path>
-        <path d="M4.93 10.93c-1.9 1.9-1.9 4.95 0 6.85 1.9 1.9 4.95 1.9 6.85 0l7.87-7.87c1.9-1.9 1.9-4.95 0-6.85-1.9-1.9-4.95-1.9-6.85 0L9.17 6.69"></path>
-        <path d="M9.17 6.69c-1.9 1.9-1.9 4.95 0 6.85 1.9 1.9 4.95 1.9 6.85 0l3.05-3.05"></path>
-      </svg>
-    ),
-    "💰": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-      </svg>
-    ),
-    "🏆": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M8 21h8M12 9v12M8 17l4-4 4 4M12 3a5 5 0 0 0-3 9h6a5 5 0 0 0-3-9Z"></path>
-      </svg>
-    ),
-    "🤝": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M16 16.5a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 16 23.5M8 16.5A3.5 3.5 0 0 0 4.5 20 3.5 3.5 0 0 0 8 23.5"></path>
-        <path d="M7 10h4m2 0h4"></path>
-        <path d="M16.5 5.5C16.5 7 16 10.5 16 10.5v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2h-3c-1.1 0-2 .9-2 2v.5M4.5 3.5C4.5 5 5 8.5 5 8.5v3c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2v-10c0-1.1.9-2 2-2h1c1.1 0 2 .9 2 2v.5"></path>
-      </svg>
-    ),
-    "🌎": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-        <path d="M2 12h20"></path>
-      </svg>
-    ),
-    "♻️": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"></path>
-        <path d="M11 19h8.203a1.786 1.786 0 0 0 1.517-.893 1.786 1.786 0 0 0 .07-1.787l-3.126-6.35"></path>
-        <path d="M11 19l3.157-3.157"></path>
-        <path d="M14.828 7.757l1.932-3.929a1.788 1.788 0 0 0-.743-2.423 1.783 1.783 0 0 0-.675-.187c-.068-.006-.137-.01-.206-.01h-6.273a1.783 1.783 0 0 0-1.626 2.62l3.595 7.32"></path>
-        <path d="M7.01 9.787 3.833 16.064"></path>
-        <path d="m7.01 9.787 3.586 3.586"></path>
-        <path d="m13.583 11.291 3.02 6.14"></path>
-        <path d="m13.583 11.291-5.143.133"></path>
-        <path d="m14.828 7.757 4.367 8.876"></path>
-        <path d="M14.828 7.757 11 11.585"></path>
-        <path d="M8.953 3.44a1.786 1.786 0 0 0-1.573.925L3.833 9"></path>
-        <path d="M14.828 7.757 8.953 3.44"></path>
-      </svg>
-    ),
-    "🍫": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M8 8H4v12h16V8H8zM4 8l4-4h8l4 4M2 14h20M10 8v12M10 2v6M14 8v12"></path>
-      </svg>
-    ),
-    "🔄": (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-        <path d="M21 3v5h-5"></path>
-        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-        <path d="M8 16H3v5"></path>
-      </svg>
-    ),
-  };
-
   return (
-    <section ref={sectionRef} id="why-choose-us" className="py-24 bg[#F5EEDD] overflow-hidden">
-      <div className="container mx-auto px-6 relative">
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-10 w-20 h-20 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
-        <div className="absolute bottom-10 left-20 w-16 h-16 rounded-full border-2 border-[#25D366] border-opacity-20 z-0"></div>
-
+    <section ref={sectionRef} id="why-choose-us" className="py-16 bg-white overflow-hidden">
+      <div className="container mx-auto px-4">
         {/* Section header */}
-        <div className="text-center mb-20 relative">
-          <h2 ref={titleRef} className="text-4xl font-bold text-[#292929] relative inline-block">
-            Why Choose <span className="text-[#25D366]">Us</span>
-            <div ref={underlineRef} className="absolute bottom-[-8px] left-0 w-full h-1 bg-[#25D366]"></div>
+        <div className="text-center mb-12">
+          <h2 ref={titleRef} className="text-3xl font-semibold text-gray-800 relative inline-block">
+            Why Choose <span className="text-[#592F1F]">Us</span>
+            <div ref={underlineRef} className="absolute bottom-[-6px] left-0 w-full h-1 bg-[#592F1F]"></div>
           </h2>
 
-          <p ref={descriptionRef} className="text-gray-600 mt-8 max-w-2xl mx-auto text-lg">
+          <p ref={descriptionRef} className="text-gray-600 mt-6 max-w-2xl mx-auto">
             Discover the unique advantages that set us apart and make us your trusted partner in premium cocoa products.
           </p>
         </div>
 
-        {/* Features grid */}
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8">
+        {/* Features grid - simpler design */}
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6">
           {whyChooseUs.map((item, index) => (
             <div
               key={index}
               ref={addToFeatureCardsRef}
-              className="bg-white rounded-xl shadow-md transition-all duration-300 border-t-4 border-[#25D366] overflow-hidden hover:shadow-lg"
+              className="bg-white rounded-lg shadow-sm border border-gray-100 transition-all duration-300 hover:border-[#592F1F]"
               onMouseEnter={() => handleCardHover(index)}
               onMouseLeave={() => handleCardLeave(index)}
             >
-              <div className="p-8 flex flex-col items-center">
-                {/* Icon container */}
-                <div ref={addToFeatureIconsRef} className="mb-6 bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center shadow-inner">
-                  {iconComponents[item.icon as keyof typeof iconComponents] || <span className="text-4xl">{item.icon}</span>}
+              <div className="p-6 flex flex-col items-center">
+                {/* Image container */}
+                <div ref={addToFeatureImagesRef} className="mb-4 w-16 h-16 relative">
+                  <Image src={item.image} alt={item.title} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) 64px, 64px" />
                 </div>
 
                 {/* Title */}
-                <h3 ref={addToFeatureTitlesRef} className="text-xl font-bold text-[#292929] text-center relative">
+                <h3 ref={addToFeatureTitlesRef} className="text-lg font-medium text-gray-800 text-center">
                   {item.title}
-                  <div className="h-1 w-10 bg-[#25D366] bg-opacity-40 mx-auto mt-3 rounded-full"></div>
                 </h3>
               </div>
-
-              {/* Card bottom accent */}
-              <div className="h-2 bg-gradient-to-r from-[#25D366] via-[#25D366] to-transparent opacity-20"></div>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:scale-105 shadow-md hover:shadow-lg font-medium"
-            onMouseEnter={(e) => {
-              gsap.to(e.target, {
-                scale: 1.05,
-                boxShadow: "0 10px 25px rgba(37, 211, 102, 0.3)",
-                duration: 0.3,
-              });
-            }}
-            onMouseLeave={(e) => {
-              gsap.to(e.target, {
-                scale: 1,
-                boxShadow: "0 4px 6px rgba(37, 211, 102, 0.1)",
-                duration: 0.3,
-              });
-            }}
-          >
-            <span>Partner With Us</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
+        {/* Simple CTA */}
+        <div className="text-center mt-12">
+          <a href="/contact" className="inline-block bg-[#592F1F] text-white px-6 py-2 rounded-md transition-all duration-300 hover:bg-opacity-90 font-medium">
+            Partner With Us
           </a>
         </div>
       </div>

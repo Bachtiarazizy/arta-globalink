@@ -200,8 +200,8 @@ export default function Hero() {
       </div>
 
       {/* Add floating elements */}
-      <div className="absolute right-10 top-1/3 w-20 h-20 rounded-full bg-[#25D366] bg-opacity-10 floating-slow"></div>
-      <div className="absolute left-10 bottom-1/3 w-16 h-16 rounded-full bg-[#25D366] bg-opacity-20 floating-medium"></div>
+      <div className="absolute right-10 top-1/3 w-20 h-20 rounded-full bg-[#592F1F] bg-opacity-10 floating-slow"></div>
+      <div className="absolute left-10 bottom-1/3 w-16 h-16 rounded-full bg-[#592F1F] bg-opacity-20 floating-medium"></div>
       <div className="absolute right-1/4 bottom-1/4 w-12 h-12 rounded-full bg-white bg-opacity-10 floating-fast"></div>
     </section>
   );

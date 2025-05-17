@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import ScrollProvider from "./components/scroll-provider";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import JsonLd from "./components/json-ld";
@@ -49,7 +48,7 @@ export default function RootLayout({
       <body className={`${montserrat.variable} antialiased`}>
         <JsonLd />
         <Navbar />
-        <ScrollProvider>{children}</ScrollProvider>
+        {children}
         <Footer />
       </body>
     </html>

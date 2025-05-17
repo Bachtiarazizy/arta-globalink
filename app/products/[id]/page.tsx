@@ -9,7 +9,6 @@ type Product = {
   category: string;
   image: string;
   shortDesc: string;
-  featured: boolean;
   origin: string;
 };
 

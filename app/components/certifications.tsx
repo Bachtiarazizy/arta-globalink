@@ -175,31 +175,30 @@ export default function Certifications() {
   };
 
   const certifications = [
-    { src: "/certification-1.png", alt: "Certification 1" },
-    { src: "/certification-2.png", alt: "Certification 2" },
-    { src: "/certification-3.png", alt: "Certification 3" },
-    { src: "/certification-4.png", alt: "Certification 4" },
-    { src: "/certification-5.png", alt: "Certification 5" },
+    { src: "/assets/1.png", alt: "Certification 1" },
+    { src: "/assets/2.png", alt: "Certification 2" },
+    { src: "/assets/3.png", alt: "Certification 3" },
+    { src: "/assets/4.png", alt: "Certification 4" },
   ];
 
   return (
     <section ref={sectionRef} id="certifications" className="py-24 bg-[#F5EEDD] overflow-hidden relative">
       {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full border-4 border-[#25D366] border-opacity-10 z-0"></div>
+      <div className="absolute top-20 left-10 w-24 h-24 rounded-full bg-[#592F1F] bg-opacity-5 z-0"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full border-4 border-[#592F1F] border-opacity-10 z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 ref={titleRef} className="text-4xl font-bold text-[#292929] relative inline-block">
-            Certified <span className="text-[#25D366]">By</span>
-            <div ref={underlineRef} className="absolute bottom-[-8px] left-0 w-full h-1 bg-[#25D366]"></div>
+            Certified <span className="text-[#592F1F]">By</span>
+            <div ref={underlineRef} className="absolute bottom-[-8px] left-0 w-full h-1 bg-[#592F1F]"></div>
           </h2>
           <p ref={descriptionRef} className="text-gray-600 mt-8 max-w-2xl mx-auto leading-relaxed">
             Our commitment to quality is backed by trusted international certifications, ensuring our products meet the highest standards in the industry.
           </p>
         </div>
 
-        <div ref={certContainerRef} className="grid md:grid-cols-5 grid-cols-2 gap-8 items-center justify-center">
+        <div ref={certContainerRef} className="grid md:grid-cols-4 grid-cols-2 gap-8 items-center justify-center">
           {certifications.map((cert, index) => (
             <div key={index} ref={addToRefs} className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 transform" onMouseEnter={handleCertHover} onMouseLeave={handleCertLeave}>
               <div className="relative p-4 certification-logo rounded-lg overflow-hidden">

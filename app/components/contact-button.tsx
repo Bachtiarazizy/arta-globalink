@@ -19,8 +19,8 @@ const ContactButton = ({ href, children, variant = "primary", size = "md", icon 
   // Variant styles
   const variantStyles = {
     primary: "relative text-base tracking-tight font-medium overflow-hidden text-[#292929] group hover:text-white",
-    secondary: "relative font-medium overflow-hidden text-[#25D366] group hover:text-[#292929]",
-    outline: "bg-transparent text-[#25D366] border border-[#25D366] hover:bg-[#25D366]/10",
+    secondary: "relative font-medium overflow-hidden text-[#592F1F] group hover:text-[#292929]",
+    outline: "bg-transparent text-[#592F1F] border border-[#592F1F] hover:bg-[#592F1F]/10",
   };
 
   // Size styles
@@ -31,12 +31,11 @@ const ContactButton = ({ href, children, variant = "primary", size = "md", icon 
   };
 
   // External link props
-  const externalProps = isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   // Special case for primary variant with the animated style
   if (variant === "primary") {
     return (
-      <Link href={href} {...externalProps} passHref>
+      <Link href={href} passHref>
         <motion.div
           className={`flex items-center gap-2 rounded-full font-medium transition-all duration-300 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
           whileHover={{
@@ -68,7 +67,7 @@ const ContactButton = ({ href, children, variant = "primary", size = "md", icon 
   }
   if (variant === "secondary") {
     return (
-      <Link href={href} {...externalProps} passHref>
+      <Link href={href} passHref>
         <motion.div
           className={`flex items-center gap-2 rounded-full font-medium transition-all duration-300 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
           whileHover={{
@@ -84,10 +83,10 @@ const ContactButton = ({ href, children, variant = "primary", size = "md", icon 
           }}
         >
           {/* Black background */}
-          <span className="absolute inset-0 bg-transparent border border-[#25D366] rounded-full z-0"></span>
+          <span className="absolute inset-0 bg-transparent border border-[#592F1F] rounded-full z-0"></span>
 
           {/* Animation element - darker black */}
-          <span className="absolute inset-x-0 bottom-0 h-0 bg-[#25D366]  rounded-full z-0 transition-all duration-300 ease-in-out group-hover:h-full"></span>
+          <span className="absolute inset-x-0 bottom-0 h-0 bg-[#592F1F]  rounded-full z-0 transition-all duration-300 ease-in-out group-hover:h-full"></span>
 
           {/* Content with gold text */}
           <span className="relative z-10">{children}</span>
@@ -101,7 +100,7 @@ const ContactButton = ({ href, children, variant = "primary", size = "md", icon 
 
   // Regular variants
   return (
-    <Link href={href} {...externalProps} passHref>
+    <Link href={href} passHref>
       <motion.div
         className={`flex items-center gap-2 rounded-full font-medium transition-all duration-300 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
         whileHover={{

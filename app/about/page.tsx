@@ -457,7 +457,7 @@ export default function AboutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </span>
-            <span className="text-[#25D366]">About Us</span>
+            <span className="text-[#E6B84F]">About Us</span>
           </div>
         </div>
       </div>
@@ -467,11 +467,11 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div ref={headerTextRef} className="space-y-6">
-              <div className="inline-block px-4 py-1 bg-[#25D366] bg-opacity-10 rounded-full">
-                <span className="text-[#25D366] font-medium text-sm">About Arta Globalink</span>
+              <div className="inline-block px-4 py-1 bg-[#592F1F] bg-opacity-10 rounded-full">
+                <span className="text-[#592F1F] font-medium text-sm">About Arta Globalink</span>
               </div>
               <h1 className="text-5xl font-bold text-[#292929] leading-tight">
-                Connecting Global <span className="text-[#25D366]">Quality</span> with Worldwide <span className="text-[#25D366]">Demand</span>
+                Connecting Global <span className="text-[#592F1F]">Quality</span> with Worldwide <span className="text-[#592F1F]">Demand</span>
               </h1>
               <p className="text-gray-600 text-lg">
                 As part of our commitment to providing high-quality food ingredients, our Cocoa Powder Business Line offers premium quality cocoa powder derived from carefully selected Indonesian cocoa beans. Processed using advanced
@@ -479,10 +479,10 @@ export default function AboutPage() {
               </p>
               <div className="flex space-x-4 pt-4">
                 <a href="/products">
-                  <button className="bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg transform hover:scale-105">Our Products</button>
+                  <button className="bg-[#592F1F] text-white px-8 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg transform hover:scale-105">Our Products</button>
                 </a>
                 <a href="/contact">
-                  <button className="border border-[#25D366] text-[#25D366] px-8 py-3 rounded-full transition-all duration-300 hover:bg-[#25D366] hover:bg-opacity-10">Contact Us</button>
+                  <button className="border border-[#592F1F] text-[#592F1F] px-8 py-3 rounded-full transition-all duration-300 hover:bg-[#592F1F] hover:bg-opacity-10">Contact Us</button>
                 </a>
               </div>
             </div>
@@ -490,8 +490,8 @@ export default function AboutPage() {
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <Image src="/assets/about-3.jpg" alt="Arta Globalink Factory" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
               </div>
-              <div className="absolute top-[-20px] right-[-20px] w-64 h-64 bg-[#25D366] bg-opacity-10 rounded-full z-0"></div>
-              <div className="absolute bottom-[-15px] left-[-15px] w-32 h-32 border-4 border-[#25D366] border-opacity-20 rounded-full z-0"></div>
+              <div className="absolute top-[-20px] right-[-20px] w-64 h-64 bg-[#592F1F] bg-opacity-10 rounded-full z-0"></div>
+              <div className="absolute bottom-[-15px] left-[-15px] w-32 h-32 border-4 border-[#592F1F] border-opacity-20 rounded-full z-0"></div>
             </div>
           </div>
         </div>
@@ -502,7 +502,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#292929]">Our Vision & Mission</h2>
-            <div className="mission-underline h-1 bg-[#25D366] w-20 mx-auto mt-4"></div>
+            <div className="mission-underline h-1 bg-[#592F1F] w-20 mx-auto mt-4"></div>
             <p className="text-gray-600 mt-6 max-w-3xl mx-auto">
               To be a trusted global partner in international trade that connects the world's markets with high-quality product solutions, focusing on sustainable growth and innovation that support global economic progress.
             </p>
@@ -542,12 +542,12 @@ export default function AboutPage() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#292929]">Our Journey</h2>
-            <div className="timeline-underline h-1 bg-[#25D366] w-20 mx-auto mt-4"></div>
+            <div className="timeline-underline h-1 bg-[#592F1F] w-20 mx-auto mt-4"></div>
           </div>
 
           <div className="relative">
             {/* Vertical timeline line */}
-            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#25D366] opacity-30 top-0 bottom-0"></div>
+            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#592F1F] opacity-30 top-0 bottom-0"></div>
 
             <div className="space-y-24">
               {[
@@ -579,14 +579,14 @@ export default function AboutPage() {
               ].map((item, index) => (
                 <div key={index} ref={addToTimelineRefs} className={`flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
                   <div className={`w-1/2 ${index % 2 === 0 ? "pr-12 text-right" : "pl-12 text-left"}`}>
-                    <div className="inline-block px-4 py-1 bg-[#25D366] bg-opacity-10 rounded-full mb-2">
-                      <span className="text-[#25D366] font-medium">{item.year}</span>
+                    <div className="inline-block px-4 py-1 bg-[#592F1F] bg-opacity-10 rounded-full mb-2">
+                      <span className="text-[#592F1F] font-medium">{item.year}</span>
                     </div>
                     <h3 className="text-xl font-bold text-[#292929] mb-2">{item.title}</h3>
                     <p className="text-gray-600">{item.description}</p>
                   </div>
 
-                  <div className="relative z-10 w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center transform -translate-x-1/2">
+                  <div className="relative z-10 w-10 h-10 rounded-full bg-[#592F1F] flex items-center justify-center transform -translate-x-1/2">
                     <div className="w-6 h-6 rounded-full bg-white"></div>
                   </div>
 
@@ -599,7 +599,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-24 bg-[#25D366] bg-opacity-5">
+      <section ref={statsRef} className="py-24 bg-[#592F1F] bg-opacity-5">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-[#292929] text-center mb-16">Arta By The Numbers</h2>
 
@@ -611,7 +611,7 @@ export default function AboutPage() {
               { value: 98, suffix: "%", label: "Customer Satisfaction" },
             ].map((stat, index) => (
               <div key={index} ref={addToStatRefs} className="bg-white p-8 rounded-lg shadow-md text-center">
-                <div className="text-5xl font-bold text-[#25D366] mb-2">
+                <div className="text-5xl font-bold text-[#592F1F] mb-2">
                   <span className="stat-value" data-value={stat.value} data-suffix={stat.suffix}>
                     0{stat.suffix}
                   </span>
@@ -626,7 +626,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#25D366] to-[#20B355] rounded-2xl p-12 text-white text-center shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-r from-[#592F1F] to-[#20B355] rounded-2xl p-12 text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
               <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white opacity-10"></div>
               <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white opacity-5"></div>
@@ -636,7 +636,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold mb-6">Ready to Explore Our Products?</h2>
               <p className="text-white text-opacity-90 max-w-2xl mx-auto mb-8">Connect with our team to learn more about our premium cocoa powder products and how we can meet your specific requirements.</p>
               <div className="flex justify-center space-x-4">
-                <button className="bg-white text-[#25D366] px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105">Contact Sales Team</button>
+                <button className="bg-white text-[#592F1F] px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105">Contact Sales Team</button>
                 <button className="border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-white hover:bg-opacity-20">Download Catalog</button>
               </div>
             </div>

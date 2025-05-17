@@ -12,7 +12,6 @@ type Product = {
   category: string;
   image: string;
   shortDesc: string;
-  featured: boolean;
   origin: string;
 };
 
@@ -216,7 +215,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </span>
-            <span className="text-[#25D366]">{product.name}</span>
+            <span className="text-[#E6B84F]">{product.name}</span>
           </div>
         </div>
       </div>
@@ -229,7 +228,6 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
             <div ref={productImageRef} className="bg-white rounded-xl shadow-md p-8 flex items-center justify-center">
               <div className="relative w-full h-96">
                 <Image src={product.image} alt={product.name} fill style={{ objectFit: "contain" }} className="product-image transition-all duration-500" />
-                {product.featured && <div className="product-badge absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold px-3 py-1 rounded-full">Featured</div>}
               </div>
             </div>
 
@@ -271,7 +269,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                   ))}
                 </div>
                 <div className="mt-4 flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-[#25D366] mr-2"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#592F1F] mr-2"></div>
                   <span className="text-sm text-gray-600">All specifications tested according to international standards</span>
                 </div>
               </div>
@@ -301,25 +299,25 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                   <h3 className="text-xl font-bold text-[#292929] mb-4">Usage & Storage</h3>
                   <ul className="space-y-3 text-gray-600">
                     <li className="flex items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#592F1F] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       Store in a cool, dry place away from direct sunlight
                     </li>
                     <li className="flex items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#592F1F] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       Keep sealed in original packaging for maximum freshness
                     </li>
                     <li className="flex items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#592F1F] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       Best used within 12 months of production date
                     </li>
                     <li className="flex items-start">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#25D366] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#592F1F] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       See packaging for specific usage instructions
@@ -348,8 +346,6 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
                           <Image src={relatedProduct.image} alt={relatedProduct.name} width={400} height={300} className="w-full h-48 object-cover" />
                         </div>
                       </div>
-
-                      {relatedProduct.featured && <div className="product-badge absolute top-4 right-4 bg-[#25D366] text-white text-xs font-bold px-3 py-1 rounded-full transform transition-transform duration-300">Featured</div>}
                     </div>
 
                     <div className="p-4">
@@ -370,7 +366,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
       <section className="py-12 bg-[#F9F9F9]">
         <div className="container mx-auto px-6 text-center">
           <Link href="/products" passHref>
-            <button className="inline-flex items-center text-[#292929] font-medium hover:text-[#25D366] transition-colors duration-300">
+            <button className="inline-flex items-center text-[#292929] font-medium hover:text-[#592F1F] transition-colors duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
               </svg>

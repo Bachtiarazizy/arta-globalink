@@ -6,7 +6,7 @@
       "category": "natural-cocoa-powder",
       "image": "/assets/products/low-fat.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": true,
+
       "origin": "Indonesia",
       "type": "natural"
     },
@@ -16,7 +16,7 @@
       "category": "natural-cocoa-powder",
       "image": "/assets/products/high-fat.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": false,
+
       "origin": "Indonesia",
       "type": "natural"
     },
@@ -26,7 +26,7 @@
       "category": "natural-cocoa-powder",
       "image": "/assets/products/premium.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": true,
+
       "origin": "Indonesia",
       "type": "natural"
     },
@@ -36,7 +36,7 @@
       "category": "alkalized-cocoa-powder",
       "image": "/assets/products/low-fat.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": true,
+
       "origin": "Indonesia",
       "type": "alkalized"
     },
@@ -46,7 +46,7 @@
       "category": "alkalized-cocoa-powder",
       "image": "/assets/products/high-fat.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": false,
+
       "origin": "Indonesia",
       "type": "alkalized"
     },
@@ -56,7 +56,7 @@
       "category": "alkalized-cocoa-powder",
       "image": "/assets/products/premium.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": true,
+
       "origin": "Indonesia",
       "type": "alkalized"
     },
@@ -66,7 +66,6 @@
       "category": "black-cocoa-powder",
       "image": "/assets/products/black.jpg",
       "shortDesc": "Cocoa Powder | HS Code 18050000",
-      "featured": true,
       "origin": "Indonesia",
       "type": "black"
     }

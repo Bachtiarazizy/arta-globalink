@@ -50,7 +50,7 @@ export default function AboutSection() {
       left: 0;
       height: 3px;
       width: 0;
-      background-color: #25D366;
+      background-color: #592F1F;
     `;
     if (titleRef.current) {
       titleRef.current.appendChild(titleUnderline);
@@ -237,35 +237,29 @@ export default function AboutSection() {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div ref={textRef} className="space-y-8 relative">
           <h2 ref={titleRef} className="text-4xl md:text-7xl font-bold text-[#292929] relative inline-block">
-            About <span className="text-[#25D366]">Arta</span>
+            About <span className="text-[#592F1F]">Arta</span>
           </h2>
 
-          <div className="relative ml-4 border-l-2 border-gray-200 pl-6">
-            <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-[#25D366]"></div>
-            <p className="text-gray-700 leading-relaxed">
-              Arta Globalink (PT ARTA FORTUNA GLOBALINK) is a company that connects farmers and factories who provide commodities or processed agricultural products that have international standard quality with entrepreneurs or companies
-              throughout the world who need it.
-            </p>
-          </div>
+          <p className="text-gray-700 leading-relaxed">
+            Arta Globalink (PT ARTA FORTUNA GLOBALINK) is a company that connects farmers and factories who provide commodities or processed agricultural products that have international standard quality with entrepreneurs or companies
+            throughout the world who need it.
+          </p>
 
-          <div className="relative ml-4 border-l-2 border-gray-200 pl-6">
-            <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-[#25D366]"></div>
-            <p className="text-gray-700 leading-relaxed">
-              This Company Profile is made as a basis for consideration, product and company information and offers of cooperation that can be done by our company. Our company is engaged in the food sector which focuses on cocoa powder
-              products.
-            </p>
-          </div>
+          <p className="text-gray-700 leading-relaxed">
+            This Company Profile is made as a basis for consideration, product and company information and offers of cooperation that can be done by our company. Our company is engaged in the food sector which focuses on cocoa powder
+            products.
+          </p>
 
           <div className="pt-6 ml-4">
             <a href="/about">
-              <button ref={buttonRef} className="bg-[#25D366] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+              <button ref={buttonRef} className="bg-[#592F1F] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
                 Click for Company Profile
               </button>
             </a>
           </div>
 
           {/* Decorative elements */}
-          <div className="absolute top-20 -left-10 w-20 h-20 rounded-full bg-[#25D366] bg-opacity-5 z-0"></div>
+          <div className="absolute top-20 -left-10 w-20 h-20 rounded-full bg-[#592F1F] bg-opacity-5 z-0"></div>
         </div>
 
         <div ref={imagesContainerRef} className="grid grid-cols-2 gap-5 relative h-[625px]">
@@ -288,8 +282,8 @@ export default function AboutSection() {
           </div>
 
           {/* Decorative elements */}
-          <div className="absolute -right-8 top-1/2 w-16 h-16 rounded-full border-4 border-[#25D366] border-opacity-20 z-0"></div>
-          <div className="absolute -bottom-8 right-1/4 w-12 h-12 rounded-full bg-[#25D366] bg-opacity-10 z-0"></div>
+          <div className="absolute -right-8 top-1/2 w-16 h-16 rounded-full border-4 border-[#592F1F] border-opacity-20 z-0"></div>
+          <div className="absolute -bottom-8 right-1/4 w-12 h-12 rounded-full bg-[#592F1F] bg-opacity-10 z-0"></div>
         </div>
       </div>
     </section>
