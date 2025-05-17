@@ -32,7 +32,6 @@ export default function FeaturedProducts() {
     setProducts(productsData.products);
 
     // Filter featured products and limit to 3
-    const featured = productsData.products.filter((product) => product.featured).slice(0, 3);
 
     // Map to our display format
     const displayProducts = [
