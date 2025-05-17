@@ -273,7 +273,7 @@ export default function WhyChooseUs() {
 
         {/* Simple CTA */}
         <div className="text-center mt-12">
-          <a href="/contact" className="inline-block bg-[#592F1F] text-white px-6 py-2 rounded-md transition-all duration-300 hover:bg-opacity-90 font-medium">
+          <a href="/contact" className="inline-block bg-[#592F1F] text-white px-6 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 font-medium">
             Partner With Us
           </a>
         </div>

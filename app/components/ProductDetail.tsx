@@ -6,6 +6,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
+type TechnicalSpecification = {
+  pH: string;
+  flavor: string;
+  fatContent: string;
+  ashContent: string;
+  fineness: string;
+  moisture: string;
+  shellContent: string;
+  application: string;
+  moq: string;
+};
+
 type Product = {
   id: number;
   name: string;
@@ -13,14 +25,18 @@ type Product = {
   image: string;
   shortDesc: string;
   origin: string;
+  type: string;
+  technicalSpecifications: TechnicalSpecification;
+  description: string;
 };
 
 type ProductDetailProps = {
   product: Product | undefined;
   relatedProducts: Product[];
+  categoryDescription?: string;
 };
 
-export default function ProductDetail({ product, relatedProducts }: ProductDetailProps) {
+export default function ProductDetail({ product, relatedProducts, categoryDescription }: ProductDetailProps) {
   const router = useRouter();
 
   // References for animations
@@ -139,55 +155,40 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
     }
   }, [product.id]);
 
-  // Description - expanded version of shortDesc
-  const productDescriptions: { [key: string]: string } = {
-    "cocoa-powder":
-      "Our premium cocoa powder is carefully processed to preserve the rich flavors and aromas of the cocoa bean. Sourced from sustainable farms in Indonesia, this powder is perfect for baking, hot chocolate, and various culinary applications. The fine texture ensures smooth incorporation into your recipes, while the deep cocoa notes elevate your creations.",
-    "cocoa-butter":
-      "Pure, unrefined cocoa butter extracted through a careful pressing process. Our cocoa butter maintains its natural scent and nutritional properties, making it ideal for both culinary applications and cosmetic products. It melts at body temperature, making it perfect for chocolate making and skin care formulations.",
-    "cocoa-nibs":
-      "These crunchy cocoa nibs are minimally processed pieces of fermented and roasted cocoa beans. They retain all the natural antioxidants and nutrients of the cocoa bean, offering a healthy alternative to processed chocolate. With their slightly bitter taste and crunchy texture, they make excellent toppings for desserts, smoothies, and baked goods.",
-    "cocoa-liquor":
-      "Also known as cocoa mass, our cocoa liquor is made by finely grinding fermented cocoa beans. It contains both cocoa solids and cocoa butter in their natural proportions, making it the foundation for all chocolate products. Professional chocolatiers value our cocoa liquor for its balanced flavor profile and smooth consistency.",
-    "by-products":
-      "Sustainable cocoa by-products that showcase our commitment to zero-waste processing. These husks can be used for garden mulching, brewing cocoa tea, or as an eco-friendly craft material. By utilizing these by-products, you contribute to a more sustainable cocoa industry while enjoying their unique benefits.",
-  };
+  // Get formatted category name
+  const formattedCategory = product.category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
-  // Default description if category-specific one doesn't exist
-  const productDescription =
-    productDescriptions[product.category] ||
-    "This high-quality cocoa product is part of our premium range sourced from sustainable farms in Indonesia. Processed with care to meet international standards, it offers excellent value for both professional and home use.";
+  // Convert technical specifications to array for easier rendering
+  const technicalSpecsList = Object.entries(product.technicalSpecifications).map(([key, value]) => {
+    const formattedKey =
+      key === "pH"
+        ? "pH"
+        : key
+            .replace(/([A-Z])/g, " $1")
+            .charAt(0)
+            .toUpperCase() + key.replace(/([A-Z])/g, " $1").slice(1);
+
+    return {
+      label: formattedKey,
+      value: value,
+    };
+  });
 
   // Product specifications
   const specifications = [
-    {
-      label: "Category",
-      value: product.category
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" "),
-    },
+    { label: "Category", value: formattedCategory },
     { label: "Origin", value: product.origin },
-  ];
-
-  const technicalSpecifications = [
-    { label: "pH", value: "5.4 - 6.7" },
-    { label: "Flavor", value: "Nice Cocoa Taste" },
-    { label: "Fat Content", value: "10-12%" },
-    { label: "Ash Content", value: "8% Max" },
-    { label: "Fineness", value: "(+/-) 99% <75μm" },
-    { label: "Moisture", value: "5.0% Max" },
-    { label: "Shell Content", value: "1.5% Max" },
-    { label: "Application", value: "Chocolate, Ice Cream, Fillings, Cakes, Cookies" },
-    { label: "MOQ", value: "26 MT in a 40ft container" },
+    { label: "Type", value: product.type.charAt(0).toUpperCase() + product.type.slice(1) },
   ];
 
   return (
     <div ref={pageRef} className="min-h-screen bg-gray-50">
       {/* Breadcrumb */}
-
       <div
-        className="relative h-64 flex items-center justify-center pt-12 md:pt-16 lg:pt-60 pb-36 text-white"
+        className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
         style={{
           backgroundImage: 'url("/assets/hero.jpg")',
           backgroundSize: "cover",
@@ -196,7 +197,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-4">{product.name}</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">{product.shortDesc}</p>
           <div className="flex items-center justify-center space-x-2">
             <Link href="/" className="text-gray-300 hover:text-white transition-colors">
@@ -235,14 +236,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
             <div ref={productInfoRef} className="flex flex-col justify-center">
               <h1 className="text-4xl font-bold text-[#292929] mb-4">{product.name}</h1>
 
-              <div className="flex items-center mb-6">
-                <div className="flex items-center space-x-2 text-sm text-gray-500">
-                  <span>•</span>
-                  <span>{product.origin}</span>
-                </div>
-              </div>
-
-              <p className="text-gray-600 mb-8">{productDescription}</p>
+              <p className="text-gray-600 mb-8">{product.description}</p>
 
               {/* General Product Info */}
               <div className="bg-gray-100 rounded-lg p-6 mb-6">
@@ -261,7 +255,7 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
               <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
                 <h3 className="text-lg font-bold text-[#292929] mb-4">Technical Specifications</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {technicalSpecifications.map((spec, index) => (
+                  {technicalSpecsList.map((spec, index) => (
                     <div key={index} className="border-b border-gray-100 pb-2">
                       <span className="text-gray-600 text-sm block">{spec.label}</span>
                       <span className="font-medium text-[#292929]">{spec.value}</span>
@@ -288,10 +282,10 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
               <div className="grid md:grid-cols-2 gap-12">
                 <div>
                   <h3 className="text-xl font-bold text-[#292929] mb-4">Description</h3>
-                  <p className="text-gray-600 mb-4">{productDescription}</p>
+                  <p className="text-gray-600 mb-4">{product.description}</p>
                   <p className="text-gray-600">
-                    Our products are ethically sourced from partner farms in Indonesia, ensuring fair compensation for farmers and sustainable agricultural practices. Each batch undergoes rigorous quality control to meet international
-                    standards.
+                    {categoryDescription ||
+                      "Our products are ethically sourced from partner farms in Indonesia, ensuring fair compensation for farmers and sustainable agricultural practices. Each batch undergoes rigorous quality control to meet international standards."}
                   </p>
                 </div>
 

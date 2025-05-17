@@ -24,7 +24,7 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <div
-        className="relative h-64 flex items-center justify-center pt-12 md:pt-16 lg:pt-60 pb-36 text-white"
+        className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
         style={{
           backgroundImage: 'url("/assets/hero.jpg")',
           backgroundSize: "cover",
@@ -33,7 +33,7 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">{categoryTitle}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-4">{categoryTitle}</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">{categoryDescription}</p>
           <div className="flex items-center justify-center space-x-2">
             <Link href="/" className="text-gray-300 hover:text-white transition-colors">

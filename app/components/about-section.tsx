@@ -262,7 +262,7 @@ export default function AboutSection() {
           <div className="absolute top-20 -left-10 w-20 h-20 rounded-full bg-[#592F1F] bg-opacity-5 z-0"></div>
         </div>
 
-        <div ref={imagesContainerRef} className="grid grid-cols-2 gap-5 relative h-[625px]">
+        <div ref={imagesContainerRef} className="md:grid grid-cols-2 gap-5 relative h-[625px] hidden ">
           {/* Left image */}
           <div className="relative rounded-lg shadow-lg overflow-hidden h-full" ref={addToRefs} onMouseEnter={(e) => handleImageHover(e, 0)} onMouseLeave={handleImageLeave} style={{ height: "625px" }}>
             <Image src="/assets/about.jpg" alt="Premium Cocoa Beans" width={400} height={650} className="object-cover w-full h-full rounded-lg transition-all duration-500" style={{ height: "100%", width: "100%", objectFit: "cover" }} />

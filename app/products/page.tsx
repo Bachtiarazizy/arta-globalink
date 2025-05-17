@@ -28,6 +28,8 @@ export default function ProductsPage() {
   const headerRef = useRef<HTMLDivElement>(null);
   const productGridRef = useRef(null);
   const filterRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const productRefs = useRef<HTMLDivElement[]>([]);
 
   // State for filtering products
@@ -232,11 +234,36 @@ export default function ProductsPage() {
     }
   };
 
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (containerRef.current) {
+        const isScrollable = containerRef.current.scrollWidth > containerRef.current.clientWidth;
+        setIsOverflowing(isScrollable);
+      }
+    };
+
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow);
+    return () => window.removeEventListener("resize", checkOverflow);
+  }, []);
+
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -150, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 150, behavior: "smooth" });
+    }
+  };
+
   return (
     <div ref={pageRef} className="min-h-screen bg-[#f9f9f9]">
       <div
         ref={breadcrumbRef}
-        className="relative h-64 flex items-center justify-center pt-12 md:pt-16 lg:pt-60 pb-36 text-white"
+        className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
         style={{
           backgroundImage: 'url("/assets/hero.jpg")',
           backgroundSize: "cover",
@@ -245,7 +272,7 @@ export default function ProductsPage() {
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">Our Premium Products</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-4">Our Premium Products</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">Explore our range of high-quality cocoa products sourced from sustainable farms and processed to international standards.</p>
           <div className="flex items-center justify-center space-x-2">
             <Link href="/" className="text-gray-300 hover:text-white transition-colors">
@@ -262,19 +289,41 @@ export default function ProductsPage() {
       </div>
 
       {/* Filters Section */}
-      <section ref={filterRef} className="pb-8 pt-0 mt-24">
-        <div className="container mx-auto px-6">
-          <div className="bg-white rounded-full shadow-md p-2 flex flex-wrap justify-center gap-2 mb-12">
-            {filters.map((filter) => (
-              <button
-                key={filter.id}
-                data-filter={filter.id}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter.id ? "bg-[#592F1F] text-white" : "bg-white text-[#292929] hover:bg-gray-100"}`}
-                onClick={() => handleFilterClick(filter.id)}
-              >
-                {filter.label}
+      <section ref={filterRef} className="pb-8 pt-0 mt-16 sm:mt-24">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="relative">
+            {isOverflowing && (
+              <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 -ml-2 z-10 bg-white rounded-full shadow-lg w-8 h-8 flex items-center justify-center text-[#592F1F] hover:bg-gray-50" aria-label="Scroll left">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
               </button>
-            ))}
+            )}
+
+            <div ref={containerRef} className="bg-white rounded-2xl shadow-lg p-3 flex overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+              <div className="flex gap-2 mx-auto">
+                {filters.map((filter) => (
+                  <button
+                    key={filter.id}
+                    data-filter={filter.id}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                      activeFilter === filter.id ? "bg-[#592F1F] text-white shadow-md transform scale-105" : "bg-white text-[#292929] hover:bg-gray-100"
+                    }`}
+                    onClick={() => handleFilterClick(filter.id)}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {isOverflowing && (
+              <button onClick={scrollRight} className="absolute right-0 top-1/2 -translate-y-1/2 -mr-2 z-10 bg-white rounded-full shadow-lg w-8 h-8 flex items-center justify-center text-[#592F1F] hover:bg-gray-50" aria-label="Scroll right">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </section>
@@ -321,7 +370,7 @@ export default function ProductsPage() {
             </div>
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6">Stay Updated With Our Product Offerings</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">Stay Updated With Our Product Offerings</h2>
               <p className="text-white text-opacity-90 mb-8">Subscribe to our newsletter to receive updates on new products, special offers, and industry insights.</p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -342,12 +391,14 @@ export default function ProductsPage() {
           </div>
 
           <div className="flex justify-center">
-            <button className="bg-[#592F1F] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              Contact Sales Team
-            </button>
+            <a href="mailto:connect@artaglobalink.com" target="_blank" rel="noopener noreferrer">
+              <button className="bg-[#592F1F] text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Contact Sales Team
+              </button>
+            </a>
           </div>
         </div>
       </section>

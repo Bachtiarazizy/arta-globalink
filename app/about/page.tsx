@@ -437,7 +437,7 @@ export default function AboutPage() {
       {/* Breadcrumb Section */}
       <div
         ref={breadcrumbRef}
-        className="relative h-64 flex items-center justify-center pt-12 md:pt-16 lg:pt-60 pb-36 text-white"
+        className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
         style={{
           backgroundImage: 'url("/assets/hero.jpg")',
           backgroundSize: "cover",
@@ -446,7 +446,7 @@ export default function AboutPage() {
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">About Us</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-4">About Us</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">Learn more about PT ARTA FORTUNA GLOBALINK's journey, mission, and commitment to quality agricultural products</p>
           <div className="flex items-center justify-center space-x-2">
             <Link href="/" className="text-gray-300 hover:text-white transition-colors">
@@ -486,7 +486,7 @@ export default function AboutPage() {
                 </a>
               </div>
             </div>
-            <div ref={headerImageRef} className="relative">
+            <div ref={headerImageRef} className="relative hidden md:block">
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
                 <Image src="/assets/about-3.jpg" alt="Arta Globalink Factory" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
               </div>
@@ -626,18 +626,20 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#592F1F] to-[#20B355] rounded-2xl p-12 text-white text-center shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-r from-[#592F1F] to-[#20B355] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
               <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white opacity-10"></div>
               <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white opacity-5"></div>
             </div>
 
             <div className="relative z-10">
-              <h2 className="text-4xl font-bold mb-6">Ready to Explore Our Products?</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-6">Ready to Explore Our Products?</h2>
               <p className="text-white text-opacity-90 max-w-2xl mx-auto mb-8">Connect with our team to learn more about our premium cocoa powder products and how we can meet your specific requirements.</p>
               <div className="flex justify-center space-x-4">
-                <button className="bg-white text-[#592F1F] px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105">Contact Sales Team</button>
-                <button className="border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-white hover:bg-opacity-20">Download Catalog</button>
+                <a href="mailto:connect@artaglobalink.com" target="_blank" rel="noopener noreferrer">
+                  <button className="bg-white text-[#592F1F] px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105">Contact Sales Team</button>
+                </a>
+                {/* <button className="border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-white hover:bg-opacity-20">Download Catalog</button> */}
               </div>
             </div>
           </div>

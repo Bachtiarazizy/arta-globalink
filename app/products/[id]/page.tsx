@@ -3,6 +3,18 @@ import { Metadata } from "next";
 import productsData from "@/data/products.json";
 import ProductDetail from "@/app/components/ProductDetail";
 
+type TechnicalSpecification = {
+  pH: string;
+  flavor: string;
+  fatContent: string;
+  ashContent: string;
+  fineness: string;
+  moisture: string;
+  shellContent: string;
+  application: string;
+  moq: string;
+};
+
 type Product = {
   id: number;
   name: string;
@@ -10,6 +22,9 @@ type Product = {
   image: string;
   shortDesc: string;
   origin: string;
+  type: string;
+  technicalSpecifications: TechnicalSpecification;
+  description: string;
 };
 
 // Generate static parameters for all product IDs
@@ -33,6 +48,21 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
+// Get category description based on product category
+function getCategoryDescription(category: string): string {
+  const categoryDescriptions: Record<string, string> = {
+    "cocoa-powder": "Our premium cocoa powder is manufactured to exacting standards. Each batch is tested for consistency and quality, ensuring a rich flavor profile and excellent performance in food applications.",
+    "cocoa-butter": "Sourced from the finest cocoa beans, our cocoa butter offers exceptional quality and purity. It's perfect for confectionery applications and cosmetic formulations requiring stable melting properties.",
+    "cocoa-liquor": "Our cocoa liquor (also known as cocoa mass) is produced from carefully selected beans through a meticulous grinding process that preserves the natural cocoa flavors and aromas.",
+    "cocoa-nibs": "These raw, minimally processed pieces of cocoa beans offer a natural source of antioxidants and fiber. Our nibs are carefully fermented and dried to develop optimal chocolate flavor.",
+  };
+
+  return (
+    categoryDescriptions[category] ||
+    "Our products are ethically sourced from partner farms in Indonesia, ensuring fair compensation for farmers and sustainable agricultural practices. Each batch undergoes rigorous quality control to meet international standards."
+  );
+}
+
 // Server Component - handles routing and data fetching
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const productId = Number(params.id);
@@ -42,5 +72,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   // Find related products (same category, excluding current product)
   const relatedProducts = product ? products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4) : [];
 
-  return <ProductDetail product={product} relatedProducts={relatedProducts} />;
+  // Get category description if product exists
+  const categoryDescription = product ? getCategoryDescription(product.category) : undefined;
+
+  return <ProductDetail product={product} relatedProducts={relatedProducts} categoryDescription={categoryDescription} />;
 }
