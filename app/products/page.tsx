@@ -31,6 +31,8 @@ export default function ProductsPage() {
   const [isOverflowing, setIsOverflowing] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const productRefs = useRef<HTMLDivElement[]>([]);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   // State for filtering products
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -234,28 +236,50 @@ export default function ProductsPage() {
     }
   };
 
+  // Check scroll position and overflow
+  const checkScrollButtons = () => {
+    if (containerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+      setIsOverflowing(scrollWidth > clientWidth);
+    }
+  };
+
   useEffect(() => {
-    const checkOverflow = () => {
-      if (containerRef.current) {
-        const isScrollable = containerRef.current.scrollWidth > containerRef.current.clientWidth;
-        setIsOverflowing(isScrollable);
-      }
+    checkScrollButtons();
+
+    const handleResize = () => {
+      checkScrollButtons();
     };
 
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    return () => window.removeEventListener("resize", checkOverflow);
+    const handleScroll = () => {
+      checkScrollButtons();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   const scrollLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: -150, behavior: "smooth" });
+      containerRef.current.scrollBy({ left: -200, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({ left: 150, behavior: "smooth" });
+      containerRef.current.scrollBy({ left: 200, behavior: "smooth" });
     }
   };
 
@@ -292,13 +316,39 @@ export default function ProductsPage() {
       <section ref={filterRef} className="pb-8 pt-0 mt-16 sm:mt-24">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="relative">
-            <div ref={containerRef} className="bg-white rounded-2xl shadow-lg p-3 flex overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-              <div className="flex gap-2 mx-auto">
+            {/* Left scroll button */}
+            {isOverflowing && canScrollLeft && (
+              <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50 transition-all duration-200 lg:hidden" style={{ marginLeft: "-12px" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+
+            {/* Right scroll button */}
+            {isOverflowing && canScrollRight && (
+              <button onClick={scrollRight} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50 transition-all duration-200 lg:hidden" style={{ marginRight: "-12px" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            )}
+
+            <div
+              ref={containerRef}
+              className="bg-white rounded-full shadow-lg p-3 flex overflow-x-auto scrollbar-hide"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <div className="flex gap-2 mx-auto lg:mx-auto">
                 {filters.map((filter) => (
                   <button
                     key={filter.id}
                     data-filter={filter.id}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                       activeFilter === filter.id ? "bg-[#592F1F] text-white shadow-md transform scale-105" : "bg-white text-[#292929] hover:bg-gray-100"
                     }`}
                     onClick={() => handleFilterClick(filter.id)}
@@ -308,6 +358,16 @@ export default function ProductsPage() {
                 ))}
               </div>
             </div>
+
+            {/* Mobile scroll indicators */}
+            {isOverflowing && (
+              <div className="flex justify-center mt-3 lg:hidden">
+                <div className="flex gap-1">
+                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${canScrollLeft ? "bg-gray-400" : "bg-gray-200"}`}></div>
+                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${canScrollRight ? "bg-gray-400" : "bg-gray-200"}`}></div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
