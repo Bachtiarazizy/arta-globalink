@@ -225,18 +225,29 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Product Image */}
-            <div ref={productImageRef} className="bg-white rounded-xl shadow-md p-8 flex items-center justify-center">
-              <div className="relative w-full h-96">
-                <Image src={product.image} alt={product.name} fill style={{ objectFit: "contain" }} className="product-image transition-all duration-500" />
+            {/* Product Image - Made Sticky */}
+            <div ref={productImageRef} className="lg:sticky lg:top-8 self-start">
+              <div className="bg-white rounded-xl shadow-md p-8">
+                {/* Landscape optimized image container */}
+                <div className="relative w-full aspect-[4/3] mb-4 rounded-lg overflow-hidden bg-gray-50">
+                  <Image src={product.image} alt={product.name} fill className="product-image transition-all duration-500 object-contain hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
+
+                {/* Product image info */}
+                {/* <div className="text-center">
+                  <h3 className="text-lg font-semibold text-[#292929] mb-2">{product.name}</h3>
+                  <p className="text-sm text-gray-600">
+                    {formattedCategory} • {product.origin}
+                  </p>
+                </div> */}
               </div>
             </div>
 
             {/* Product Information */}
             <div ref={productInfoRef} className="flex flex-col justify-center">
-              <h1 className="text-4xl font-bold text-[#292929] mb-4">{product.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-[#292929] mb-4">{product.name}</h1>
 
-              <p className="text-gray-600 mb-8">{product.description}</p>
+              {/* <p className="text-gray-600 mb-8">{product.description}</p> */}
 
               {/* General Product Info */}
               <div className="bg-gray-100 rounded-lg p-6 mb-6">

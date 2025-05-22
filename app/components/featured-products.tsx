@@ -341,7 +341,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section ref={sectionRef} id="products" className="bg-gradient-to-b from-white to-gray-50 py-24 relative">
+    <section ref={sectionRef} id="products" className="bg-white py-24 relative">
       <div className="container mx-auto px-4 sm:px-6 overflow-x-hidden">
         {/* Header section with animated elements */}
         <div className="text-center mb-20 relative">

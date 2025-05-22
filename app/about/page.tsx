@@ -20,8 +20,6 @@ export default function AboutPage() {
   const headerTextRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const teamRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const valueRefs = useRef<HTMLDivElement[]>([]);
   const teamMemberRefs = useRef<HTMLDivElement[]>([]);
   const timelineItemRefs = useRef<HTMLDivElement[]>([]);
@@ -204,9 +202,9 @@ export default function AboutPage() {
     // Timeline items staggered animation
     gsap.fromTo(
       timelineItemRefs.current,
-      { x: (i) => (i % 2 === 0 ? -50 : 50), opacity: 0 },
+      { y: 50, opacity: 0 },
       {
-        x: 0,
+        y: 0,
         opacity: 1,
         stagger: 0.2,
         duration: 0.8,
@@ -218,190 +216,47 @@ export default function AboutPage() {
       }
     );
 
-    // Connect timeline dots with animated line
-    gsap.fromTo(
-      ".timeline-line",
-      { height: 0 },
-      {
-        height: "100%",
-        duration: 1.5,
-        ease: "power3.inOut",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 60%",
-          end: "bottom 80%",
-          scrub: 1,
-        },
-      }
-    );
-
-    // Team section animations
-    if (teamRef.current) {
+    // Connect timeline dots with animated line - only on desktop
+    if (window.innerWidth >= 768) {
       gsap.fromTo(
-        teamRef.current.querySelector("h2"),
-        { y: 30, opacity: 0 },
+        ".timeline-line",
+        { height: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
+          height: "100%",
+          duration: 1.5,
+          ease: "power3.inOut",
           scrollTrigger: {
-            trigger: teamRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+            trigger: timelineRef.current,
+            start: "top 60%",
+            end: "bottom 80%",
+            scrub: 1,
+          },
+        }
+      );
+    } else {
+      // Mobile timeline line animation
+      gsap.fromTo(
+        ".timeline-line-mobile",
+        { height: 0 },
+        {
+          height: "100%",
+          duration: 1.5,
+          ease: "power3.inOut",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 60%",
+            end: "bottom 80%",
+            scrub: 1,
           },
         }
       );
     }
-
-    if (teamRef.current) {
-      gsap.fromTo(
-        teamRef.current.querySelector(".team-underline"),
-        { width: 0 },
-        {
-          width: "80px",
-          duration: 1,
-          delay: 0.3,
-          scrollTrigger: {
-            trigger: teamRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    if (teamRef.current) {
-      gsap.fromTo(
-        teamRef.current.querySelector("p"),
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: teamRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Team members staggered animation
-    gsap.fromTo(
-      teamMemberRefs.current,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.2)",
-        scrollTrigger: {
-          trigger: teamRef.current,
-          start: "top 60%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Stats section animations
-    if (statsRef.current) {
-      gsap.fromTo(
-        statsRef.current.querySelector("h2"),
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Stats items staggered animation
-    gsap.fromTo(
-      statItemRefs.current,
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.15,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: statsRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Count up animation for stats
-    statItemRefs.current.forEach((statItem) => {
-      const statValue = statItem.querySelector(".stat-value");
-      if (!statValue) return;
-      const dataValue = statValue.getAttribute("data-value");
-      const endValue = parseInt(dataValue ?? "0", 10);
-
-      gsap.fromTo(
-        statValue,
-        { textContent: 0 },
-        {
-          textContent: endValue,
-          duration: 2,
-          ease: "power2.out",
-          snap: { textContent: 1 },
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: "top 70%",
-            toggleActions: "play none none reset",
-          },
-          onUpdate: function () {
-            statValue.textContent = Math.ceil(this.targets()[0].textContent) + (statValue.getAttribute("data-suffix") || "");
-          },
-        }
-      );
-    });
 
     // Clean up ScrollTrigger instances on component unmount
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
-
-  // Team member hover animation
-  const handleTeamMemberHover = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, {
-      y: -10,
-      boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
-      duration: 0.3,
-    });
-
-    gsap.to((e.currentTarget as HTMLDivElement).querySelector(".team-social"), {
-      y: 0,
-      opacity: 1,
-      duration: 0.3,
-    });
-  };
-
-  const handleTeamMemberLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, {
-      y: 0,
-      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
-      duration: 0.3,
-    });
-
-    gsap.to((e.currentTarget as HTMLDivElement).querySelector(".team-social"), {
-      y: 20,
-      opacity: 0,
-      duration: 0.3,
-    });
-  };
 
   // Value item hover animation
   const handleValueHover = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -437,7 +292,7 @@ export default function AboutPage() {
       {/* Breadcrumb Section */}
       <div
         ref={breadcrumbRef}
-        className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
+        className="relative h-64 flex items-center justify-center pt-40 md:pt-48 lg:pt-60 pb-36 text-white"
         style={{
           backgroundImage: 'url("/assets/hero.jpg")',
           backgroundSize: "cover",
@@ -463,7 +318,7 @@ export default function AboutPage() {
       </div>
 
       {/* Hero Section */}
-      <section ref={headerRef} className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section ref={headerRef} className="py-24 ">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div ref={headerTextRef} className="space-y-6">
@@ -498,7 +353,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Values Section */}
-      <section ref={missionRef} className="py-24 bg-white">
+      <section ref={missionRef} className="py-24 ">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#292929]">Our Vision & Mission</h2>
@@ -538,14 +393,15 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section ref={timelineRef} className="py-24 bg-gray-50">
+      <section ref={timelineRef} className="py-24 ">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#292929]">Our Journey</h2>
             <div className="timeline-underline h-1 bg-[#592F1F] w-20 mx-auto mt-4"></div>
           </div>
 
-          <div className="relative">
+          {/* Desktop Timeline */}
+          <div className="relative hidden md:block">
             {/* Vertical timeline line */}
             <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#592F1F] opacity-30 top-0 bottom-0"></div>
 
@@ -595,36 +451,67 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Stats Section */}
-      <section ref={statsRef} className="py-24 bg-[#592F1F] bg-opacity-5">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-[#292929] text-center mb-16">Arta By The Numbers</h2>
+          {/* Mobile Timeline */}
+          <div className="relative md:hidden">
+            {/* Vertical timeline line for mobile */}
+            <div className="timeline-line-mobile absolute left-8 w-1 bg-[#592F1F] opacity-30 top-0 bottom-0"></div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { value: 10, suffix: "+", label: "Years Experience" },
-              { value: 25, suffix: "+", label: "Countries Served" },
-              { value: 1500, suffix: "", label: "Metric Tons Annual Export" },
-              { value: 98, suffix: "%", label: "Customer Satisfaction" },
-            ].map((stat, index) => (
-              <div key={index} ref={addToStatRefs} className="bg-white p-8 rounded-lg shadow-md text-center">
-                <div className="text-5xl font-bold text-[#592F1F] mb-2">
-                  <span className="stat-value" data-value={stat.value} data-suffix={stat.suffix}>
-                    0{stat.suffix}
-                  </span>
+            <div className="space-y-12">
+              {[
+                {
+                  year: "2018",
+                  title: "Company Founded",
+                  description: "PT ARTA FORTUNA GLOBALINK was established with a vision to connect Indonesian agricultural products with global markets.",
+                },
+                {
+                  year: "2019",
+                  title: "First International Partnership",
+                  description: "Established our first major international distribution partnership, expanding our reach to Asian markets.",
+                },
+                {
+                  year: "2020",
+                  title: "Quality Certification",
+                  description: "Achieved international quality certifications, establishing our commitment to premium standards.",
+                },
+                {
+                  year: "2022",
+                  title: "Production Expansion",
+                  description: "Expanded our production facilities, increasing capacity to meet growing international demand.",
+                },
+                {
+                  year: "2024",
+                  title: "Global Market Presence",
+                  description: "Expanded distribution network to reach markets across Europe, Americas, and Asia-Pacific regions.",
+                },
+              ].map((item, index) => (
+                <div key={index} ref={addToTimelineRefs} className="flex items-start">
+                  {/* Timeline dot */}
+                  <div className="relative z-10 w-16 h-16 rounded-full bg-[#592F1F] flex items-center justify-center flex-shrink-0 mr-6 mt-1">
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                      <span className="text-[#592F1F] font-bold text-xs">{item.year.slice(-2)}</span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 pb-8">
+                    <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-[#592F1F]">
+                      <div className="inline-block px-3 py-1 bg-[#592F1F] bg-opacity-10 rounded-full mb-3">
+                        <span className="text-[#592F1F] font-medium text-sm">{item.year}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-[#292929] mb-3">{item.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-gray-600 font-medium">{stat.label}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 ">
         <div className="container mx-auto px-6">
           <div className="bg-gradient-to-r from-[#592F1F] to-[#20B355] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
@@ -639,7 +526,6 @@ export default function AboutPage() {
                 <a href="mailto:connect@artaglobalink.com" target="_blank" rel="noopener noreferrer">
                   <button className="bg-white text-[#592F1F] px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105">Contact Sales Team</button>
                 </a>
-                {/* <button className="border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-white hover:bg-opacity-20">Download Catalog</button> */}
               </div>
             </div>
           </div>

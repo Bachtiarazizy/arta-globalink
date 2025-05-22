@@ -260,7 +260,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-[#f9f9f9]">
+    <div ref={pageRef} className="min-h-screen">
       <div
         ref={breadcrumbRef}
         className="relative h-64 flex items-center justify-center pt-36 md:pt-40 lg:pt-60 pb-36 text-white"
@@ -292,14 +292,6 @@ export default function ProductsPage() {
       <section ref={filterRef} className="pb-8 pt-0 mt-16 sm:mt-24">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="relative">
-            {isOverflowing && (
-              <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 -ml-2 z-10 bg-white rounded-full shadow-lg w-8 h-8 flex items-center justify-center text-[#592F1F] hover:bg-gray-50" aria-label="Scroll left">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-            )}
-
             <div ref={containerRef} className="bg-white rounded-2xl shadow-lg p-3 flex overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
               <div className="flex gap-2 mx-auto">
                 {filters.map((filter) => (
@@ -316,14 +308,6 @@ export default function ProductsPage() {
                 ))}
               </div>
             </div>
-
-            {isOverflowing && (
-              <button onClick={scrollRight} className="absolute right-0 top-1/2 -translate-y-1/2 -mr-2 z-10 bg-white rounded-full shadow-lg w-8 h-8 flex items-center justify-center text-[#592F1F] hover:bg-gray-50" aria-label="Scroll right">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-            )}
           </div>
         </div>
       </section>
@@ -383,7 +367,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Quick Contact */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#292929]">Need Custom Solutions?</h2>

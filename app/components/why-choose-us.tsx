@@ -232,7 +232,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section ref={sectionRef} id="why-choose-us" className="py-16 bg-white overflow-hidden">
+    <section ref={sectionRef} id="why-choose-us" className="py-16 overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Section header */}
         <div className="text-center mb-12">

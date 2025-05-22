@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Logo Section */}
           <div className="flex flex-col items-center md:items-start">
             <div className="flex justify-center md:justify-start">
-              <img src="/assets/logo.png" alt="Logo" width={200} height={100} className="max-w-[150px] sm:max-w-[200px] md:max-w-[250px]" />
+              <img src="/assets/black-logo.png" alt="Logo" width={200} height={100} className="max-w-[150px] sm:max-w-[200px] md:max-w-[250px]" />
             </div>
 
             <p className="mt-6 max-w-md text-center md:text-left text-sm sm:text-base leading-relaxed text-[#292929]">Providing the best quality of agricultural commodities and suitable as raw materials for processed products</p>

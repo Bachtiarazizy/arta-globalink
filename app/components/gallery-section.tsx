@@ -210,12 +210,12 @@ export default function Gallery() {
 
   // Gallery image data
   const galleryImages = [
-    { src: "/assets/gallery/gallery-1.jpg", alt: "Premium Cocoa Beans", caption: "Premium Cocoa Beans" },
-    { src: "/assets/gallery/gallery-2.jpg", alt: "Sustainable Harvesting", caption: "Sustainable Harvesting" },
-    { src: "/assets/gallery/gallery-3.jpg", alt: "Processing Facility", caption: "Our Modern Processing Facility" },
-    { src: "/assets/gallery/gallery-4.jpg", alt: "Cocoa Powder", caption: "Premium Cocoa Powder" },
-    { src: "/assets/gallery/gallery-5.jpg", alt: "Quality Control", caption: "Quality Control Process" },
-    { src: "/assets/gallery/gallery-6.jpg", alt: "Finished Products", caption: "Finished Cocoa Products" },
+    { src: "/assets/gallery/gallery-1.jpg", alt: "Premium Cocoa Beans" },
+    { src: "/assets/gallery/gallery-2.jpg", alt: "Sustainable Harvesting" },
+    { src: "/assets/gallery/gallery-3.jpg", alt: "Processing Facility" },
+    { src: "/assets/gallery/gallery-4.jpg", alt: "Cocoa Powder" },
+    { src: "/assets/gallery/gallery-5.jpg", alt: "Quality Control" },
+    { src: "/assets/gallery/gallery-6.jpg", alt: "Finished Products" },
   ];
 
   return (
@@ -246,8 +246,9 @@ export default function Gallery() {
               onMouseLeave={handleImageLeave}
               onClick={() => openLightbox(index)}
             >
-              <div className="aspect-w-4 aspect-h-3 overflow-hidden">
-                <Image src={image.src} alt={image.alt} width={500} height={375} className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
+              {/* Fixed aspect ratio container for landscape format */}
+              <div className="relative w-full h-64 overflow-hidden">
+                <Image src={image.src} alt={image.alt} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
               <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 w-full">
@@ -268,9 +269,10 @@ export default function Gallery() {
               ✕
             </button>
             <div className="bg-white p-4 rounded-lg shadow-2xl">
-              <Image src={galleryImages[selectedImage].src} alt={galleryImages[selectedImage].alt} width={1200} height={900} className="object-contain w-full rounded" />
+              <div className="relative w-full h-96 mb-4">
+                <Image src={galleryImages[selectedImage].src} alt={galleryImages[selectedImage].alt} fill className="object-contain rounded" sizes="(max-width: 1024px) 100vw, 1024px" />
+              </div>
               <div className="p-4">
-                <h3 className="text-xl font-bold text-gray-800">{galleryImages[selectedImage].caption}</h3>
                 <p className="text-gray-600 mt-2">High-quality cocoa products from our sustainable facilities.</p>
               </div>
             </div>
