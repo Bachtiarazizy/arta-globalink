@@ -17,6 +17,16 @@ export default function Hero() {
   const buttonsRef = useRef(null);
   const overlayRef = useRef(null);
 
+  const handleInquiry = () => {
+    // You can customize this action - for example, open a contact form, redirect to contact page, etc.
+    window.open(`mailto:connect@artaglobalink.com?subject=Inquiry about Cocoa Products&body=Hello, I would like to inquire about the Cocoa product.`, "_blank");
+  };
+
+  const handleVisitRequest = () => {
+    // You can customize this action - for example, open a quote form, redirect to quote page, etc.
+    window.open(`mailto:connect@artaglobalink.com?subject=Visit Request&body=Hello, I would like to plan a visit to the Factory.`, "_blank");
+  };
+
   // Initialize animations
   useEffect(() => {
     // Initial animations when the page loads
@@ -170,15 +180,18 @@ export default function Hero() {
         </p>
 
         <div ref={buttonsRef} className="space-x-4">
-          <button className="bg-[#F5EEDD] text-[#292929] px-8 py-3 rounded-full hover:bg-opacity-80 transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e, 1.15)} onMouseLeave={handleButtonLeave}>
+          <button onClick={handleInquiry} className="bg-[#F5EEDD] text-[#292929] px-8 py-3 rounded-full hover:bg-opacity-80 transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e, 1.15)} onMouseLeave={handleButtonLeave}>
             <span className="relative z-10">Order Now</span>
           </button>
 
-          <a href="mailto:connect@artaglobalink.com" target="_blank" rel="noopener noreferrer">
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-[#292929] transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e)} onMouseLeave={handleButtonLeave}>
-              <span className="relative z-10">Plan to Visit</span>
-            </button>
-          </a>
+          <button
+            onClick={handleVisitRequest}
+            className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-[#292929] transition-all duration-300"
+            onMouseEnter={(e) => handleButtonHover(e)}
+            onMouseLeave={handleButtonLeave}
+          >
+            <span className="relative z-10">Plan to Visit</span>
+          </button>
         </div>
 
         {/* <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">

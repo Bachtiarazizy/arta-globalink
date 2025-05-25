@@ -280,7 +280,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-24 ">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#592F1F] to-[##8B4513] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-r from-[#592F1F] to-[#8B4513] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
               <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white opacity-10"></div>
               <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white opacity-5"></div>

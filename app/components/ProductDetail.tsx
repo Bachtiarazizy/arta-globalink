@@ -50,6 +50,7 @@ type ProductDetailProps = {
 
 export default function ProductDetail({ product, relatedProducts, categoryDescription }: ProductDetailProps) {
   const router = useRouter();
+  // Fix: Initialize with the correct key that matches JSON data
   const [selectedColor, setSelectedColor] = useState<string>("brown");
 
   // References for animations
@@ -75,14 +76,29 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     return product.type === "natural" || (product.type === "alkalized" && product.id === 4);
   };
 
-  // Instead of generating color options, you could read from JSON:
+  // Fix: Correct the color options mapping to match JSON keys
   const getColorOptions = (product: Product): ColorOption[] => {
     if (!product.colorVariants) return [];
 
     return [
-      { id: "brown", name: "Brown", image: product.colorVariants.brown, color: "#8B4513" },
-      { id: "dark-brown", name: "Dark Brown", image: product.colorVariants["dark"], color: "#654321" },
-      { id: "very-dark-brown", name: "Very Dark Brown", image: product.colorVariants["very-dark"], color: "#3C2414" },
+      {
+        id: "brown",
+        name: "Brown",
+        image: product.colorVariants.brown,
+        color: "#8B4513",
+      },
+      {
+        id: "dark", // Fix: Use "dark" instead of "dark-brown" to match JSON
+        name: "Dark Brown",
+        image: product.colorVariants.dark,
+        color: "#654321",
+      },
+      {
+        id: "very-dark", // Fix: Use "very-dark" instead of "very-dark-brown" to match JSON
+        name: "Very Dark Brown",
+        image: product.colorVariants["very-dark"],
+        color: "#3C2414",
+      },
     ];
   };
 
@@ -151,6 +167,8 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
   const handleColorChange = (colorId: string) => {
     if (colorId === selectedColor) return;
 
+    console.log("Changing color from", selectedColor, "to", colorId); // Debug log
+
     // Fade out current image
     if (productImageRef.current) {
       const imageElement = productImageRef.current.querySelector(".product-main-image");
@@ -176,12 +194,12 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
   // Handle button actions
   const handleInquiry = () => {
     // You can customize this action - for example, open a contact form, redirect to contact page, etc.
-    window.open(`mailto:contact@artaglobalink.com?subject=Inquiry about ${product.name}&body=Hello, I would like to inquire about the ${product.name} product.`, "_blank");
+    window.open(`mailto:connect@artaglobalink.com?subject=Inquiry about ${product.name}&body=Hello, I would like to inquire about the ${product.name} product.`, "_blank");
   };
 
   const handleQuoteRequest = () => {
     // You can customize this action - for example, open a quote form, redirect to quote page, etc.
-    window.open(`mailto:contact@artaglobalink.com?subject=Quote Request for ${product.name}&body=Hello, I would like to request a quote for the ${product.name} product.`, "_blank");
+    window.open(`mailto:connect@artaglobalink.com?subject=Quote Request for ${product.name}&body=Hello, I would like to request a quote for the ${product.name} product.`, "_blank");
   };
 
   // Animations
@@ -275,6 +293,14 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
   const colorOptions = showColorOptions ? getColorOptions(product) : [];
   const currentImage = getCurrentImage(product);
 
+  // Debug logs
+  console.log("Product:", product.name);
+  console.log("Should show color options:", showColorOptions);
+  console.log("Color variants:", product.colorVariants);
+  console.log("Color options:", colorOptions);
+  console.log("Selected color:", selectedColor);
+  console.log("Current image:", currentImage);
+
   return (
     <div ref={pageRef} className="min-h-screen bg-gray-50">
       {/* Breadcrumb */}
@@ -321,11 +347,18 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
               <div className="bg-white rounded-xl shadow-md p-8">
                 {/* Landscape optimized image container */}
                 <div className="relative w-full aspect-[4/3] mb-4 rounded-lg overflow-hidden bg-gray-50">
-                  <Image src={currentImage} alt={product.name} fill className="product-main-image product-image transition-all duration-500 object-contain hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image
+                    src={currentImage}
+                    alt={product.name}
+                    fill
+                    className="product-main-image product-image transition-all duration-500 object-contain hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    key={selectedColor} // Add key to force re-render when color changes
+                  />
                 </div>
 
                 {/* Color Options */}
-                {showColorOptions && (
+                {showColorOptions && colorOptions.length > 0 && (
                   <div className="mt-6">
                     <h4 className="text-sm font-medium text-gray-700 mb-3">Color Options:</h4>
                     <div className="flex space-x-3">
