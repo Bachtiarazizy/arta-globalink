@@ -272,7 +272,7 @@ export default function Gallery() {
               <div className="relative w-full h-96 mb-4">
                 <Image src={galleryImages[selectedImage].src} alt={galleryImages[selectedImage].alt} fill className="object-contain rounded" sizes="(max-width: 1024px) 100vw, 1024px" />
               </div>
-              <div className="p-4">
+              <div className="p-4 text-center">
                 <p className="text-gray-600 mt-2">High-quality cocoa products from our sustainable facilities.</p>
               </div>
             </div>
@@ -280,7 +280,7 @@ export default function Gallery() {
             {/* Navigation buttons */}
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 flex w-full justify-between px-4">
               <button
-                className="bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full p-3 text-white"
+                className="bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full p-3 text-[#592F1F]"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage((prevIndex) => (prevIndex !== null && prevIndex > 0 ? prevIndex - 1 : galleryImages.length - 1));
@@ -289,7 +289,7 @@ export default function Gallery() {
                 ←
               </button>
               <button
-                className="bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full p-3 text-white"
+                className="bg-white bg-opacity-20 hover:bg-opacity-40 rounded-full p-3 text-[#592F1F]"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage((prevIndex) => (prevIndex !== null && prevIndex < galleryImages.length - 1 ? prevIndex + 1 : 0));

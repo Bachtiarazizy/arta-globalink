@@ -1,6 +1,6 @@
 // app/products/[id]/page.tsx
 import { Metadata } from "next";
-import productsData from "@/data/products.json";
+import productsData from "@/data/products.js";
 import ProductDetail from "@/app/components/ProductDetail";
 
 type TechnicalSpecification = {

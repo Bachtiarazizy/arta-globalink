@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
-import productsData from "@/data/products.json";
+import productsData from "@/data/products.js";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {

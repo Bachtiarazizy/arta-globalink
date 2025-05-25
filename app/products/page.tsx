@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import productsData from "@/data/products.json";
+import productsData from "@/data/products.js";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {

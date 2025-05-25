@@ -50,7 +50,6 @@ type ProductDetailProps = {
 
 export default function ProductDetail({ product, relatedProducts, categoryDescription }: ProductDetailProps) {
   const router = useRouter();
-  // Fix: Initialize with the correct key that matches JSON data
   const [selectedColor, setSelectedColor] = useState<string>("brown");
 
   // References for animations
@@ -76,7 +75,6 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     return product.type === "natural" || (product.type === "alkalized" && product.id === 4);
   };
 
-  // Fix: Correct the color options mapping to match JSON keys
   const getColorOptions = (product: Product): ColorOption[] => {
     if (!product.colorVariants) return [];
 
@@ -88,15 +86,15 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
         color: "#8B4513",
       },
       {
-        id: "dark", // Fix: Use "dark" instead of "dark-brown" to match JSON
+        id: "dark", // Now matches the JS file key
         name: "Dark Brown",
-        image: product.colorVariants.dark,
+        image: product.colorVariants.dark, // Clean access
         color: "#654321",
       },
       {
-        id: "very-dark", // Fix: Use "very-dark" instead of "very-dark-brown" to match JSON
+        id: "very-dark", // Now matches the JS file key
         name: "Very Dark Brown",
-        image: product.colorVariants["very-dark"],
+        image: product.colorVariants["very-dark"], // Clean access
         color: "#3C2414",
       },
     ];

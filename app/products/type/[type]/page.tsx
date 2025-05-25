@@ -1,6 +1,6 @@
 // app/products/type/[type]/page.tsx
 import { Metadata } from "next";
-import productsData from "@/data/products.json";
+import productsData from "@/data/products.js";
 import ProductCategoryPage from "@/app/components/ProductCategoryPage";
 
 type Product = {
