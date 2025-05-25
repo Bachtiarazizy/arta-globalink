@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,6 +28,18 @@ type Product = {
   type: string;
   technicalSpecifications: TechnicalSpecification;
   description: string;
+  colorVariants?: {
+    brown: string;
+    dark: string;
+    "very-dark": string;
+  };
+};
+
+type ColorOption = {
+  id: string;
+  name: string;
+  image: string;
+  color: string;
 };
 
 type ProductDetailProps = {
@@ -38,6 +50,7 @@ type ProductDetailProps = {
 
 export default function ProductDetail({ product, relatedProducts, categoryDescription }: ProductDetailProps) {
   const router = useRouter();
+  const [selectedColor, setSelectedColor] = useState<string>("brown");
 
   // References for animations
   const pageRef = useRef<HTMLDivElement>(null);
@@ -54,6 +67,33 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     if (el && !productRefs.current.includes(el)) {
       productRefs.current.push(el);
     }
+  };
+
+  // Check if product should have color options
+  const shouldShowColorOptions = (product: Product | undefined): boolean => {
+    if (!product) return false;
+    return product.type === "natural" || (product.type === "alkalized" && product.id === 4);
+  };
+
+  // Instead of generating color options, you could read from JSON:
+  const getColorOptions = (product: Product): ColorOption[] => {
+    if (!product.colorVariants) return [];
+
+    return [
+      { id: "brown", name: "Brown", image: product.colorVariants.brown, color: "#8B4513" },
+      { id: "dark-brown", name: "Dark Brown", image: product.colorVariants["dark"], color: "#654321" },
+      { id: "very-dark-brown", name: "Very Dark Brown", image: product.colorVariants["very-dark"], color: "#3C2414" },
+    ];
+  };
+
+  const getCurrentImage = (product: Product): string => {
+    if (!shouldShowColorOptions(product)) {
+      return product.image;
+    }
+
+    const colorOptions = getColorOptions(product);
+    const selectedOption = colorOptions.find((option) => option.id === selectedColor);
+    return selectedOption?.image || product.image;
   };
 
   // If product not found, handle it
@@ -107,6 +147,43 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     });
   };
 
+  // Handle color selection with animation
+  const handleColorChange = (colorId: string) => {
+    if (colorId === selectedColor) return;
+
+    // Fade out current image
+    if (productImageRef.current) {
+      const imageElement = productImageRef.current.querySelector(".product-main-image");
+      if (imageElement) {
+        gsap.to(imageElement, {
+          opacity: 0,
+          duration: 0.2,
+          onComplete: () => {
+            setSelectedColor(colorId);
+            // Fade in new image
+            gsap.to(imageElement, {
+              opacity: 1,
+              duration: 0.3,
+            });
+          },
+        });
+      }
+    } else {
+      setSelectedColor(colorId);
+    }
+  };
+
+  // Handle button actions
+  const handleInquiry = () => {
+    // You can customize this action - for example, open a contact form, redirect to contact page, etc.
+    window.open(`mailto:contact@artaglobalink.com?subject=Inquiry about ${product.name}&body=Hello, I would like to inquire about the ${product.name} product.`, "_blank");
+  };
+
+  const handleQuoteRequest = () => {
+    // You can customize this action - for example, open a quote form, redirect to quote page, etc.
+    window.open(`mailto:contact@artaglobalink.com?subject=Quote Request for ${product.name}&body=Hello, I would like to request a quote for the ${product.name} product.`, "_blank");
+  };
+
   // Animations
   useEffect(() => {
     // Product image animation
@@ -155,6 +232,11 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     }
   }, [product.id]);
 
+  // Reset selected color when product changes
+  useEffect(() => {
+    setSelectedColor("brown");
+  }, [product.id]);
+
   // Get formatted category name
   const formattedCategory = product.category
     .split("-")
@@ -163,13 +245,18 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
 
   // Convert technical specifications to array for easier rendering
   const technicalSpecsList = Object.entries(product.technicalSpecifications).map(([key, value]) => {
-    const formattedKey =
-      key === "pH"
-        ? "pH"
-        : key
-            .replace(/([A-Z])/g, " $1")
-            .charAt(0)
-            .toUpperCase() + key.replace(/([A-Z])/g, " $1").slice(1);
+    let formattedKey;
+    if (key === "pH") {
+      formattedKey = "pH";
+    } else if (key === "moq") {
+      formattedKey = "MOQ";
+    } else {
+      formattedKey =
+        key
+          .replace(/([A-Z])/g, " $1")
+          .charAt(0)
+          .toUpperCase() + key.replace(/([A-Z])/g, " $1").slice(1);
+    }
 
     return {
       label: formattedKey,
@@ -183,6 +270,10 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     { label: "Origin", value: product.origin },
     { label: "Type", value: product.type.charAt(0).toUpperCase() + product.type.slice(1) },
   ];
+
+  const showColorOptions = shouldShowColorOptions(product);
+  const colorOptions = showColorOptions ? getColorOptions(product) : [];
+  const currentImage = getCurrentImage(product);
 
   return (
     <div ref={pageRef} className="min-h-screen bg-gray-50">
@@ -230,24 +321,48 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
               <div className="bg-white rounded-xl shadow-md p-8">
                 {/* Landscape optimized image container */}
                 <div className="relative w-full aspect-[4/3] mb-4 rounded-lg overflow-hidden bg-gray-50">
-                  <Image src={product.image} alt={product.name} fill className="product-image transition-all duration-500 object-contain hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <Image src={currentImage} alt={product.name} fill className="product-main-image product-image transition-all duration-500 object-contain hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
 
-                {/* Product image info */}
-                {/* <div className="text-center">
-                  <h3 className="text-lg font-semibold text-[#292929] mb-2">{product.name}</h3>
-                  <p className="text-sm text-gray-600">
-                    {formattedCategory} • {product.origin}
-                  </p>
-                </div> */}
+                {/* Color Options */}
+                {showColorOptions && (
+                  <div className="mt-6">
+                    <h4 className="text-sm font-medium text-gray-700 mb-3">Color Options:</h4>
+                    <div className="flex space-x-3">
+                      {colorOptions.map((option) => (
+                        <button
+                          key={option.id}
+                          onClick={() => handleColorChange(option.id)}
+                          className={`relative group flex flex-col items-center p-2 rounded-lg transition-all duration-200 ${selectedColor === option.id ? "ring-2 ring-[#592F1F] bg-gray-50" : "hover:bg-gray-50"}`}
+                          title={option.name}
+                        >
+                          {/* Color circle */}
+                          <div
+                            className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${selectedColor === option.id ? "border-[#592F1F] shadow-md" : "border-gray-300 group-hover:border-gray-400"}`}
+                            style={{ backgroundColor: option.color }}
+                          />
+                          {/* Color name */}
+                          <span className={`text-xs mt-1 transition-colors duration-200 ${selectedColor === option.id ? "text-[#592F1F] font-medium" : "text-gray-600 group-hover:text-gray-800"}`}>{option.name}</span>
+
+                          {/* Selected indicator */}
+                          {selectedColor === option.id && (
+                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#592F1F] rounded-full flex items-center justify-center">
+                              <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Product Information */}
             <div ref={productInfoRef} className="flex flex-col justify-center">
               <h1 className="text-3xl md:text-4xl font-bold text-[#292929] mb-4">{product.name}</h1>
-
-              {/* <p className="text-gray-600 mb-8">{product.description}</p> */}
 
               {/* General Product Info */}
               <div className="bg-gray-100 rounded-lg p-6 mb-6">
@@ -263,7 +378,7 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
               </div>
 
               {/* Technical Specifications */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
                 <h3 className="text-lg font-bold text-[#292929] mb-4">Technical Specifications</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {technicalSpecsList.map((spec, index) => (
@@ -277,6 +392,26 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
                   <div className="w-3 h-3 rounded-full bg-[#592F1F] mr-2"></div>
                   <span className="text-sm text-gray-600">All specifications tested according to international standards</span>
                 </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button onClick={handleInquiry} className="flex-1 bg-[#592F1F] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#4a251a] transition-colors duration-300 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                  </svg>
+                  Send Inquiry
+                </button>
+                <button
+                  onClick={handleQuoteRequest}
+                  className="flex-1 bg-white text-[#592F1F] border-2 border-[#592F1F] px-6 py-3 rounded-lg font-medium hover:bg-[#592F1F] hover:text-white transition-colors duration-300 flex items-center justify-center"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  Request Quote
+                </button>
               </div>
             </div>
           </div>

@@ -19,42 +19,15 @@ export default function AboutPage() {
   const headerImageRef = useRef<HTMLDivElement>(null);
   const headerTextRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
   const valueRefs = useRef<HTMLDivElement[]>([]);
-  const teamMemberRefs = useRef<HTMLDivElement[]>([]);
-  const timelineItemRefs = useRef<HTMLDivElement[]>([]);
-  const statItemRefs = useRef<HTMLDivElement[]>([]);
 
   // Reset refs arrays
   valueRefs.current = [];
-  teamMemberRefs.current = [];
-  timelineItemRefs.current = [];
-  statItemRefs.current = [];
 
   // Helper functions to add elements to refs
   const addToValueRefs = (el: HTMLDivElement | null) => {
     if (el && !valueRefs.current.includes(el)) {
       valueRefs.current.push(el);
-    }
-  };
-
-  const addToTeamRefs = (el: HTMLDivElement | null) => {
-    if (el && !teamMemberRefs.current.includes(el)) {
-      teamMemberRefs.current.push(el);
-    }
-  };
-
-  interface TimelineItemElement extends HTMLDivElement {}
-
-  const addToTimelineRefs = (el: TimelineItemElement | null) => {
-    if (el && !timelineItemRefs.current.includes(el)) {
-      timelineItemRefs.current.push(el);
-    }
-  };
-
-  const addToStatRefs = (el: HTMLDivElement | null) => {
-    if (el && !statItemRefs.current.includes(el)) {
-      statItemRefs.current.push(el);
     }
   };
 
@@ -163,94 +136,6 @@ export default function AboutPage() {
         },
       }
     );
-
-    // Timeline section animations
-    if (timelineRef.current) {
-      gsap.fromTo(
-        timelineRef.current.querySelector("h2"),
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    if (timelineRef.current) {
-      gsap.fromTo(
-        timelineRef.current.querySelector(".timeline-underline"),
-        { width: 0 },
-        {
-          width: "80px",
-          duration: 1,
-          delay: 0.3,
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-
-    // Timeline items staggered animation
-    gsap.fromTo(
-      timelineItemRefs.current,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Connect timeline dots with animated line - only on desktop
-    if (window.innerWidth >= 768) {
-      gsap.fromTo(
-        ".timeline-line",
-        { height: 0 },
-        {
-          height: "100%",
-          duration: 1.5,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 60%",
-            end: "bottom 80%",
-            scrub: 1,
-          },
-        }
-      );
-    } else {
-      // Mobile timeline line animation
-      gsap.fromTo(
-        ".timeline-line-mobile",
-        { height: 0 },
-        {
-          height: "100%",
-          duration: 1.5,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: timelineRef.current,
-            start: "top 60%",
-            end: "bottom 80%",
-            scrub: 1,
-          },
-        }
-      );
-    }
 
     // Clean up ScrollTrigger instances on component unmount
     return () => {
@@ -392,128 +277,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section ref={timelineRef} className="py-24 ">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#292929]">Our Journey</h2>
-            <div className="timeline-underline h-1 bg-[#592F1F] w-20 mx-auto mt-4"></div>
-          </div>
-
-          {/* Desktop Timeline */}
-          <div className="relative hidden md:block">
-            {/* Vertical timeline line */}
-            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#592F1F] opacity-30 top-0 bottom-0"></div>
-
-            <div className="space-y-24">
-              {[
-                {
-                  year: "2018",
-                  title: "Company Founded",
-                  description: "PT ARTA FORTUNA GLOBALINK was established with a vision to connect Indonesian agricultural products with global markets.",
-                },
-                {
-                  year: "2019",
-                  title: "First International Partnership",
-                  description: "Established our first major international distribution partnership, expanding our reach to Asian markets.",
-                },
-                {
-                  year: "2020",
-                  title: "Quality Certification",
-                  description: "Achieved international quality certifications, establishing our commitment to premium standards.",
-                },
-                {
-                  year: "2022",
-                  title: "Production Expansion",
-                  description: "Expanded our production facilities, increasing capacity to meet growing international demand.",
-                },
-                {
-                  year: "2024",
-                  title: "Global Market Presence",
-                  description: "Expanded distribution network to reach markets across Europe, Americas, and Asia-Pacific regions.",
-                },
-              ].map((item, index) => (
-                <div key={index} ref={addToTimelineRefs} className={`flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
-                  <div className={`w-1/2 ${index % 2 === 0 ? "pr-12 text-right" : "pl-12 text-left"}`}>
-                    <div className="inline-block px-4 py-1 bg-[#592F1F] bg-opacity-10 rounded-full mb-2">
-                      <span className="text-[#592F1F] font-medium">{item.year}</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-[#292929] mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
-                  </div>
-
-                  <div className="relative z-10 w-10 h-10 rounded-full bg-[#592F1F] flex items-center justify-center transform -translate-x-1/2">
-                    <div className="w-6 h-6 rounded-full bg-white"></div>
-                  </div>
-
-                  <div className="w-1/2"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile Timeline */}
-          <div className="relative md:hidden">
-            {/* Vertical timeline line for mobile */}
-            <div className="timeline-line-mobile absolute left-8 w-1 bg-[#592F1F] opacity-30 top-0 bottom-0"></div>
-
-            <div className="space-y-12">
-              {[
-                {
-                  year: "2018",
-                  title: "Company Founded",
-                  description: "PT ARTA FORTUNA GLOBALINK was established with a vision to connect Indonesian agricultural products with global markets.",
-                },
-                {
-                  year: "2019",
-                  title: "First International Partnership",
-                  description: "Established our first major international distribution partnership, expanding our reach to Asian markets.",
-                },
-                {
-                  year: "2020",
-                  title: "Quality Certification",
-                  description: "Achieved international quality certifications, establishing our commitment to premium standards.",
-                },
-                {
-                  year: "2022",
-                  title: "Production Expansion",
-                  description: "Expanded our production facilities, increasing capacity to meet growing international demand.",
-                },
-                {
-                  year: "2024",
-                  title: "Global Market Presence",
-                  description: "Expanded distribution network to reach markets across Europe, Americas, and Asia-Pacific regions.",
-                },
-              ].map((item, index) => (
-                <div key={index} ref={addToTimelineRefs} className="flex items-start">
-                  {/* Timeline dot */}
-                  <div className="relative z-10 w-16 h-16 rounded-full bg-[#592F1F] flex items-center justify-center flex-shrink-0 mr-6 mt-1">
-                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-                      <span className="text-[#592F1F] font-bold text-xs">{item.year.slice(-2)}</span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pb-8">
-                    <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-[#592F1F]">
-                      <div className="inline-block px-3 py-1 bg-[#592F1F] bg-opacity-10 rounded-full mb-3">
-                        <span className="text-[#592F1F] font-medium text-sm">{item.year}</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-[#292929] mb-3">{item.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-24 ">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#592F1F] to-[#20B355] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-r from-[#592F1F] to-[##8B4513] rounded-2xl py-12 px-6 text-white text-center shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full">
               <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white opacity-10"></div>
               <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white opacity-5"></div>

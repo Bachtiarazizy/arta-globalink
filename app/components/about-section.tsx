@@ -245,11 +245,6 @@ export default function AboutSection() {
             throughout the world who need it.
           </p>
 
-          <p className="text-gray-700 leading-relaxed">
-            This Company Profile is made as a basis for consideration, product and company information and offers of cooperation that can be done by our company. Our company is engaged in the food sector which focuses on cocoa powder
-            products.
-          </p>
-
           <div className="pt-6 ml-4">
             <a href="/about">
               <button ref={buttonRef} className="bg-[#592F1F] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>

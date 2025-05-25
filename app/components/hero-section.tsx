@@ -174,9 +174,11 @@ export default function Hero() {
             <span className="relative z-10">Order Now</span>
           </button>
 
-          <button className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-[#292929] transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e)} onMouseLeave={handleButtonLeave}>
-            <span className="relative z-10">Learn More</span>
-          </button>
+          <a href="mailto:connect@artaglobalink.com" target="_blank" rel="noopener noreferrer">
+            <button className="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-[#292929] transition-all duration-300" onMouseEnter={(e) => handleButtonHover(e)} onMouseLeave={handleButtonLeave}>
+              <span className="relative z-10">Plan to Visit</span>
+            </button>
+          </a>
         </div>
 
         {/* <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
