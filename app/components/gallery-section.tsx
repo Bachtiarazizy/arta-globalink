@@ -325,7 +325,6 @@ export default function Gallery() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
               <div className="absolute bottom-0 left-0 p-4 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 w-full">
-                <h3 className="font-semibold text-sm">{image.alt}</h3>
                 <div className="h-1 w-10 bg-[#592F1F] mt-2 rounded-full"></div>
               </div>
             </div>
@@ -378,7 +377,7 @@ export default function Gallery() {
             {/* Navigation buttons */}
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 flex w-full justify-between px-6">
               <button
-                className="bg-white bg-opacity-20 hover:bg-opacity-40 backdrop-blur-sm rounded-full p-4 text-white hover:text-[#592F1F] transition-all duration-300 hover:scale-110 shadow-lg"
+                className="bg-white bg-opacity-20 hover:bg-opacity-40 backdrop-blur-sm rounded-full p-4  hover:text-[#592F1F] transition-all duration-300 hover:scale-110 shadow-lg"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage((prevIndex) => (prevIndex !== null && prevIndex > 0 ? prevIndex - 1 : visibleCount - 1));
@@ -387,7 +386,7 @@ export default function Gallery() {
                 <ChevronLeft size={28} strokeWidth={2.5} />
               </button>
               <button
-                className="bg-white bg-opacity-20 hover:bg-opacity-40 backdrop-blur-sm rounded-full p-4 text-white hover:text-[#592F1F] transition-all duration-300 hover:scale-110 shadow-lg"
+                className="bg-white bg-opacity-20 hover:bg-opacity-40 backdrop-blur-sm rounded-full p-4  hover:text-[#592F1F] transition-all duration-300 hover:scale-110 shadow-lg"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage((prevIndex) => (prevIndex !== null && prevIndex < visibleCount - 1 ? prevIndex + 1 : 0));
