@@ -223,7 +223,7 @@ export default function WhyChooseUs() {
     },
     {
       image: "/assets/7.png",
-      title: "Custom solutions for every industry needs",
+      title: "Your dedicated Cocoa Partner with end-to-end support",
     },
     {
       image: "/assets/8.png",
@@ -258,7 +258,7 @@ export default function WhyChooseUs() {
             >
               <div className="p-6 flex flex-col items-center">
                 {/* Image container */}
-                <div ref={addToFeatureImagesRef} className="mb-4 w-16 h-16 relative">
+                <div ref={addToFeatureImagesRef} className="mb-2 w-28 h-28 relative">
                   <Image src={item.image} alt={item.title} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) 64px, 64px" />
                 </div>
 
