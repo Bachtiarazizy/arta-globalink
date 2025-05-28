@@ -175,8 +175,9 @@ export default function Hero() {
         </h1>
 
         <p ref={paragraphRef} className="text-xl mb-8 max-w-3xl mx-auto">
-          Indulge in Pure Delight with Our Premium Cocoa Powder
-          <br /> Elevating Taste to Unparalleled Heights with Every Spoonful!
+          Crafted from the Finest Indonesian Beans,
+          <br />
+          Our Cocoa Product Delivers World-Class Quality with Every Scoop.
         </p>
 
         <div ref={buttonsRef} className="space-x-4">

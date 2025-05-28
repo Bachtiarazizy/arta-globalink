@@ -49,12 +49,6 @@ export default function Gallery() {
     { src: "/assets/gallery/gallery-7.jpg", alt: "Cocoa Farm Workers" },
     { src: "/assets/gallery/gallery-8.jpg", alt: "Drying Process" },
     { src: "/assets/gallery/gallery-9.jpg", alt: "Modern Equipment" },
-    { src: "/assets/gallery/gallery-10.jpg", alt: "Laboratory Testing" },
-    { src: "/assets/gallery/gallery-11.jpg", alt: "Packaging Line" },
-    { src: "/assets/gallery/gallery-12.jpg", alt: "Export Ready" },
-    { src: "/assets/gallery/gallery-13.jpg", alt: "Team Collaboration" },
-    { src: "/assets/gallery/gallery-14.jpg", alt: "Sustainability Practices" },
-    { src: "/assets/gallery/gallery-15.jpg", alt: "Final Inspection" },
   ];
 
   const totalImages = galleryImages.length;

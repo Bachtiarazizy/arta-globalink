@@ -86,14 +86,14 @@ const productsData = {
       id: 4,
       name: "FC800A ALKALIZED LOW FAT",
       category: "alkalized-cocoa-powder",
-      image: "/assets/products/alkalized/alkalized-low-fat.jpg",
+      image: "/assets/products/alkalized/low-fat/alkalized-low-fat.jpg",
       shortDesc: "Cocoa Powder | HS Code 18050000",
       origin: "Indonesia",
       type: "alkalized",
       colorVariants: {
-        brown: "/assets/products/alkalized/alkalized-low-fat.jpg",
-        dark: "/assets/products/alkalized/alkalized-low-fat-dark.jpg",
-        "very-dark": "/assets/products/alkalized/alkalized-low-fat-very-dark.jpg",
+        brown: "/assets/products/alkalized/low-fat/alkalized-low-fat.jpg",
+        dark: "/assets/products/alkalized/low-fat/alkalized-low-fat-dark.jpg",
+        "very-dark": "/assets/products/alkalized/low-fat/alkalized-low-fat-very-dark.jpg",
       },
       technicalSpecifications: {
         pH: "6.8 - 7.2",
@@ -113,11 +113,15 @@ const productsData = {
       id: 5,
       name: "FC900A ALKALIZED HIGH FAT",
       category: "alkalized-cocoa-powder",
-      image: "/assets/products/high-fat.jpg",
+      image: "/assets/products/alkalized/high-fat/alkalized-high-fat.jpg",
       shortDesc: "Cocoa Powder | HS Code 18050000",
       origin: "Indonesia",
       type: "alkalized",
-
+      colorVariants: {
+        brown: "/assets/products/alkalized/high-fat/alkalized-high-fat.jpg",
+        dark: "/assets/products/alkalized/high-fat/alkalized-high-fat-dark.jpg",
+        "very-dark": "/assets/products/alkalized/high-fat/alkalized-high-fat-very-dark.jpg",
+      },
       technicalSpecifications: {
         pH: "6.8 - 7.2",
         flavor: "As per Standard",
@@ -140,6 +144,11 @@ const productsData = {
       shortDesc: "Cocoa Powder | HS Code 18050000",
       origin: "Indonesia",
       type: "alkalized",
+      colorVariants: {
+        brown: "/assets/products/alkalized/high-fat-premium/alkalized-high-fat-premium.jpg",
+        dark: "/assets/products/alkalized/high-fat-premium/alkalized-high-fat-premium-dark.jpg",
+        "very-dark": "/assets/products/alkalized/high-fat-premium/alkalized-high-fat-premium-very-dark.jpg",
+      },
       technicalSpecifications: {
         pH: "6.8 - 7.2",
         flavor: "As per Standard",

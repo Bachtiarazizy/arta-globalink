@@ -296,8 +296,9 @@ export default function FeaturedProducts() {
   const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement>) => {
     gsap.to(e.target, {
       scale: 1.05,
-      backgroundColor: "#1eb058", // Darker green on hover
-      boxShadow: "0 5px 15px rgba(37, 211, 102, 0.4)",
+      backgroundColor: "#f5eedd", // white background
+      color: "#000000", // black text
+      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
       duration: 0.3,
     });
   };
@@ -305,8 +306,9 @@ export default function FeaturedProducts() {
   const handleButtonLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
     gsap.to(e.target, {
       scale: 1,
-      backgroundColor: "#592F1F",
-      boxShadow: "0 0 0 rgba(37, 211, 102, 0)",
+      backgroundColor: "#592F1F", // original background color
+      color: "#ffffff", // original text color
+      boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
       duration: 0.3,
     });
   };

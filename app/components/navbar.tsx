@@ -177,7 +177,7 @@ export default function Navbar() {
       {/* Desktop Navigation */}
       <div className="hidden md:block absolute top-0 left-0 w-full z-50">
         {/* Top Section with Email and Social Links */}
-        <div className="border-b border-gray-400 px-20">
+        <div className="border-b border-gray-400 px-20 hidden md:flex ">
           <div className="container mx-auto flex justify-between">
             {/* Left Side - Contact Info with borders */}
             <div className="flex">
@@ -194,12 +194,12 @@ export default function Navbar() {
 
             {/* Right Side - Hashtag and Social Links with borders */}
             <div className="flex">
-              <span className="text-white text-sm px-6 py-4 border-r border-l border-gray-400">#MakeYourChocolate</span>
+              <span className="text-white text-sm px-6 py-4 border-r border-l border-gray-400">#OneStopCocoa</span>
 
               <div className="flex items-center space-x-4 px-6 py-4">
-                <SocialLink href="https://instagram.com/company" icon={<Instagram size={18} />} label="Instagram" />
-                <SocialLink href="https://twitter.com/company" icon={<X size={18} />} label="Twitter" />
-                <SocialLink href="https://facebook.com/company" icon={<Facebook size={18} />} label="Facebook" />
+                <SocialLink href="#" icon={<Instagram size={18} />} label="Instagram" />
+                <SocialLink href="#" icon={<X size={18} />} label="Twitter" />
+                <SocialLink href="#" icon={<Facebook size={18} />} label="Facebook" />
               </div>
             </div>
           </div>

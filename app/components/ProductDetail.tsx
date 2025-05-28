@@ -72,7 +72,7 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
   // Check if product should have color options
   const shouldShowColorOptions = (product: Product | undefined): boolean => {
     if (!product) return false;
-    return product.type === "natural" || (product.type === "alkalized" && product.id === 4);
+    return product.type === "natural" || product.type === "alkalized";
   };
 
   const getColorOptions = (product: Product): ColorOption[] => {
@@ -358,23 +358,22 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
                 {/* Color Options */}
                 {showColorOptions && colorOptions.length > 0 && (
                   <div className="mt-6">
-                    <h4 className="text-sm font-medium text-gray-700 mb-3">Color Options:</h4>
-                    <div className="flex space-x-3">
+                    <h4 className="text-lg font-bold text-[#292929] mb-4">Color Options:</h4>
+                    <div className="grid grid-cols-3 gap-3">
                       {colorOptions.map((option) => (
                         <button
                           key={option.id}
                           onClick={() => handleColorChange(option.id)}
-                          className={`relative group flex flex-col items-center p-2 rounded-lg transition-all duration-200 ${selectedColor === option.id ? "ring-2 ring-[#592F1F] bg-gray-50" : "hover:bg-gray-50"}`}
+                          className={`relative group flex flex-col items-center p-1 rounded-lg transition-all duration-200 w-full ${selectedColor === option.id ? "ring-2 ring-[#592F1F] bg-gray-50" : "hover:bg-gray-50"}`}
                           title={option.name}
                         >
                           {/* Color circle */}
                           <div
-                            className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${selectedColor === option.id ? "border-[#592F1F] shadow-md" : "border-gray-300 group-hover:border-gray-400"}`}
+                            className={`h-10 w-10 md:w-16 md:h-16 rounded-full border-2 transition-all duration-200 ${selectedColor === option.id ? "border-[#592F1F] shadow-md" : "border-gray-300 group-hover:border-gray-400"}`}
                             style={{ backgroundColor: option.color }}
                           />
                           {/* Color name */}
-                          <span className={`text-xs mt-1 transition-colors duration-200 ${selectedColor === option.id ? "text-[#592F1F] font-medium" : "text-gray-600 group-hover:text-gray-800"}`}>{option.name}</span>
-
+                          <span className={`text-sm mt-1 transition-colors duration-200 text-center ${selectedColor === option.id ? "text-[#592F1F]" : "text-gray-600 group-hover:text-gray-800"}`}>{option.name}</span>
                           {/* Selected indicator */}
                           {selectedColor === option.id && (
                             <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#592F1F] rounded-full flex items-center justify-center">
