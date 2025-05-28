@@ -171,13 +171,11 @@ export default function Hero() {
 
       <div className="hero-content relative z-10 text-center px-6 max-w-4xl">
         <h1 ref={headingRef} className="text-4xl md:text-6xl font-bold mb-4 transition-all duration-300 cursor-default">
-          We Supply Around <span className="text-[#F5EEDD]">the World</span>
+          We Supply<span className="text-[#F5EEDD]"> Around the World</span>
         </h1>
 
         <p ref={paragraphRef} className="text-xl mb-8 max-w-3xl mx-auto">
-          Crafted from the Finest Indonesian Beans,
-          <br />
-          Our Cocoa Product Delivers World-Class Quality with Every Scoop.
+          Crafted from the Finest Indonesian Beans, Our Cocoa Product Delivers World-Class Quality with Every Scoop.
         </p>
 
         <div ref={buttonsRef} className="space-x-4">
