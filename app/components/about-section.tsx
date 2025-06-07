@@ -249,7 +249,7 @@ export default function AboutSection() {
           </p>
 
           <div className="pt-6 ml-4">
-            <a href="/about">
+            <a href="/Company Profile & Catalogue.pdf" target="_blank" rel="noopener noreferrer">
               <button ref={buttonRef} className="bg-[#592F1F] text-white px-8 py-3 rounded-full transition-all duration-300" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
                 Click for Company Profile
               </button>

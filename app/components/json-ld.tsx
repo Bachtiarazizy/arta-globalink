@@ -37,14 +37,6 @@ export default function JsonLd() {
               description: "High-quality cocoa products with international standards",
             },
           },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Product",
-              name: "Vanilla Products",
-              description: "Premium vanilla products sourced sustainably",
-            },
-          },
         ],
       },
     });

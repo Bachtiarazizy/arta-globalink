@@ -46,9 +46,14 @@ export default function Gallery() {
     { src: "/assets/gallery/gallery-5.jpg", alt: "Quality Control" },
     { src: "/assets/gallery/gallery-6.jpg", alt: "Finished Products" },
     // Add more images here
-    { src: "/assets/gallery/gallery-7.jpg", alt: "Cocoa Farm Workers" },
+    { src: "/assets/gallery/gallery-7.jpg", alt: "High Quality Cocoa" },
     { src: "/assets/gallery/gallery-8.jpg", alt: "Drying Process" },
-    { src: "/assets/gallery/gallery-9.jpg", alt: "Modern Equipment" },
+    { src: "/assets/gallery/gallery-9.jpg", alt: "Cocoa Powder" },
+    { src: "/assets/gallery/warehouse.jpg", alt: "Warehouse" },
+    { src: "/assets/gallery/warehouse(1).jpg", alt: "Warehouse" },
+    { src: "/assets/gallery/warehouse(2).jpg", alt: "Warehouse" },
+    { src: "/assets/gallery/warehouse(3).jpg", alt: "Warehouse" },
+    { src: "/assets/gallery/warehouse(4).jpg", alt: "Warehouse" },
   ];
 
   const totalImages = galleryImages.length;
