@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
@@ -228,7 +227,7 @@ export default function AboutPage() {
             </div>
             <div ref={headerImageRef} className="relative hidden md:block">
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
-                <Image src="/assets/about-3.jpg" alt="Arta Globalink Factory" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
+                <img src="/assets/about-3.jpg" alt="Arta Globalink Factory" width={600} height={400} className="w-full h-auto object-cover rounded-lg" />
               </div>
               <div className="absolute top-[-20px] right-[-20px] w-64 h-64 bg-[#592F1F] bg-opacity-10 rounded-full z-0"></div>
               <div className="absolute bottom-[-15px] left-[-15px] w-32 h-32 border-4 border-[#592F1F] border-opacity-20 rounded-full z-0"></div>

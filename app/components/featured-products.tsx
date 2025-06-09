@@ -46,7 +46,7 @@ export default function FeaturedProducts() {
         name: "Alkalized (Dutch) Cocoa Powder",
         color: "#8B4513",
         features: ["100% Premium Grade", "Balanced Acidity", "Smooth Texture"],
-        image: "/assets/products/cocoa/brown.jpg",
+        image: "/assets/products/cocoa/dark-brown.jpg",
         type: "alkalized",
       },
       {
@@ -378,7 +378,6 @@ export default function FeaturedProducts() {
                     ref={addToProductImageRefs}
                     className="w-full h-full transition-transform duration-500"
                     style={{
-                      backgroundColor: product.color,
                       backgroundImage: `url(${product.image})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",

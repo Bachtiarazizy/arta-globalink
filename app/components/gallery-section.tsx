@@ -39,17 +39,15 @@ export default function Gallery() {
 
   // Extended gallery image data - Add more images here
   const galleryImages = [
-    { src: "/assets/gallery/gallery-1.jpg", alt: "Premium Cocoa Beans" },
-    { src: "/assets/gallery/gallery-2.jpg", alt: "Sustainable Harvesting" },
-    { src: "/assets/gallery/gallery-3.jpg", alt: "Processing Facility" },
-    { src: "/assets/gallery/gallery-4.jpg", alt: "Cocoa Powder" },
-    { src: "/assets/gallery/gallery-5.jpg", alt: "Quality Control" },
-    { src: "/assets/gallery/gallery-6.jpg", alt: "Finished Products" },
+    { src: "/assets/gallery/gallery-1-min.jpg", alt: "Premium Cocoa Beans" },
+    { src: "/assets/gallery/gallery-2-min.jpg", alt: "Sustainable Harvesting" },
+    { src: "/assets/gallery/gallery-3-min.jpg", alt: "Processing Facility" },
+    { src: "/assets/gallery/gallery-4-min.jpg", alt: "Cocoa Powder" },
+    { src: "/assets/gallery/gallery-5-min.jpg", alt: "Quality Control" },
+    { src: "/assets/gallery/gallery-6-min.jpg", alt: "Finished Products" },
     // Add more images here
-    { src: "/assets/gallery/gallery-7.jpg", alt: "High Quality Cocoa" },
-    { src: "/assets/gallery/gallery-8.jpg", alt: "Drying Process" },
-    { src: "/assets/gallery/gallery-9.jpg", alt: "Cocoa Powder" },
-    { src: "/assets/gallery/warehouse.jpg", alt: "Warehouse" },
+    { src: "/assets/gallery/gallery-7-min.jpg", alt: "High Quality Cocoa" },
+    { src: "/assets/gallery/gallery-8-min.jpg", alt: "Drying Process" },
     { src: "/assets/gallery/warehouse(1).jpg", alt: "Warehouse" },
     { src: "/assets/gallery/warehouse(2).jpg", alt: "Warehouse" },
     { src: "/assets/gallery/warehouse(3).jpg", alt: "Warehouse" },

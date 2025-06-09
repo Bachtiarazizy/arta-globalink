@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
 type TechnicalSpecification = {
@@ -49,7 +46,6 @@ type ProductDetailProps = {
 };
 
 export default function ProductDetail({ product, relatedProducts, categoryDescription }: ProductDetailProps) {
-  const router = useRouter();
   const [selectedColor, setSelectedColor] = useState<string>("brown");
 
   // References for animations
@@ -67,6 +63,19 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
     if (el && !productRefs.current.includes(el)) {
       productRefs.current.push(el);
     }
+  };
+
+  // Navigation functions for static export
+  const navigateToProducts = () => {
+    window.location.href = "/products";
+  };
+
+  const navigateToHome = () => {
+    window.location.href = "/";
+  };
+
+  const navigateToProduct = (productId: number) => {
+    window.location.href = `/products/${productId}`;
   };
 
   // Check if product should have color options
@@ -114,8 +123,8 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
   if (!product) {
     // Redirect to products page if product is not found
     useEffect(() => {
-      router.push("/products");
-    }, [router]);
+      navigateToProducts();
+    }, []);
 
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -315,17 +324,17 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
           <h1 className="text-2xl md:text-4xl font-bold mb-4">{product.name}</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6">{product.shortDesc}</p>
           <div className="flex items-center justify-center space-x-2">
-            <Link href="/" className="text-gray-300 hover:text-white transition-colors">
+            <button onClick={navigateToHome} className="text-gray-300 hover:text-white transition-colors cursor-pointer">
               Home
-            </Link>
+            </button>
             <span className="text-gray-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </span>
-            <Link href="/products" className="text-gray-300 hover:text-white transition-colors">
+            <button onClick={navigateToProducts} className="text-gray-300 hover:text-white transition-colors cursor-pointer">
               Products
-            </Link>
+            </button>
             <span className="text-gray-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -345,12 +354,10 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
               <div className="bg-white rounded-xl shadow-md p-8">
                 {/* Landscape optimized image container */}
                 <div className="relative w-full aspect-[4/3] mb-4 rounded-lg overflow-hidden bg-gray-50">
-                  <Image
+                  <img
                     src={currentImage}
                     alt={product.name}
-                    fill
-                    className="product-main-image product-image transition-all duration-500 object-contain hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="product-main-image product-image transition-all duration-500 object-contain hover:scale-105 w-full h-full"
                     key={selectedColor} // Add key to force re-render when color changes
                   />
                 </div>
@@ -508,24 +515,29 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
 
             <div ref={relatedProductsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {relatedProducts.map((relatedProduct) => (
-                <Link href={`/products/${relatedProduct.id}`} key={relatedProduct.id} passHref>
-                  <div ref={addToProductRefs} className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer" onMouseEnter={handleProductHover} onMouseLeave={handleProductLeave}>
-                    <div className="relative">
-                      <div className="h-48 overflow-hidden">
-                        <div className="product-image transition-all duration-500 transform">
-                          <Image src={relatedProduct.image} alt={relatedProduct.name} width={400} height={300} className="w-full h-48 object-cover" />
-                        </div>
+                <div
+                  key={relatedProduct.id}
+                  ref={addToProductRefs}
+                  className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer"
+                  onMouseEnter={handleProductHover}
+                  onMouseLeave={handleProductLeave}
+                  onClick={() => navigateToProduct(relatedProduct.id)}
+                >
+                  <div className="relative">
+                    <div className="h-48 overflow-hidden">
+                      <div className="product-image transition-all duration-500 transform">
+                        <img src={relatedProduct.image} alt={relatedProduct.name} className="w-full h-48 object-cover" />
                       </div>
                     </div>
-
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold text-[#292929] mb-1">{relatedProduct.name}</h3>
-                      <p className="text-gray-600 text-sm mb-2 line-clamp-2">{relatedProduct.shortDesc}</p>
-
-                      <div className="flex justify-between items-center"></div>
-                    </div>
                   </div>
-                </Link>
+
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-[#292929] mb-1">{relatedProduct.name}</h3>
+                    <p className="text-gray-600 text-sm mb-2 line-clamp-2">{relatedProduct.shortDesc}</p>
+
+                    <div className="flex justify-between items-center"></div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -535,14 +547,12 @@ export default function ProductDetail({ product, relatedProducts, categoryDescri
       {/* Back to Products */}
       <section className="py-12 bg-[#F9F9F9]">
         <div className="container mx-auto px-6 text-center">
-          <Link href="/products" passHref>
-            <button className="inline-flex items-center text-[#292929] font-medium hover:text-[#592F1F] transition-colors duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-              </svg>
-              Back to all products
-            </button>
-          </Link>
+          <button onClick={navigateToProducts} className="inline-flex items-center text-[#292929] font-medium hover:text-[#592F1F] transition-colors duration-300 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+            </svg>
+            Back to all products
+          </button>
         </div>
       </section>
     </div>

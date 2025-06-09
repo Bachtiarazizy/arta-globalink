@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -151,10 +151,10 @@ export default function AboutSection() {
     );
 
     // Parallax effect on images while scrolling
-    imageRefs.current.forEach((img, index) => {
+    imageRefs.current.forEach((Image, index) => {
       const direction = index % 2 === 0 ? -15 : 15;
 
-      gsap.to(img, {
+      gsap.to(Image, {
         y: direction,
         ease: "none",
         scrollTrigger: {
@@ -205,9 +205,9 @@ export default function AboutSection() {
     });
 
     // Other images get subtle dim effect
-    imageRefs.current.forEach((img, i) => {
+    imageRefs.current.forEach((Image, i) => {
       if (i !== index) {
-        gsap.to(img, {
+        gsap.to(Image, {
           scale: 0.98,
           opacity: 0.7,
           duration: 0.4,
@@ -218,8 +218,8 @@ export default function AboutSection() {
 
   const handleImageLeave = () => {
     // Reset all images to default state
-    imageRefs.current.forEach((img) => {
-      gsap.to(img, {
+    imageRefs.current.forEach((Image) => {
+      gsap.to(Image, {
         scale: 1,
         opacity: 1,
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",

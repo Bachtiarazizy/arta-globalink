@@ -3,7 +3,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Image from "next/image";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -17,7 +16,7 @@ export default function WhyChooseUs() {
   const underlineRef = useRef(null);
   const descriptionRef = useRef(null);
   const featureCardsRef = useRef<HTMLDivElement[]>([]);
-  const featureImagesRef = useRef<HTMLDivElement[]>([]);
+  const featureImagesRef = useRef<HTMLImageElement[]>([]);
   const featureTitlesRef = useRef<HTMLHeadingElement[]>([]);
 
   // Clear refs arrays on each render
@@ -32,7 +31,7 @@ export default function WhyChooseUs() {
     }
   };
 
-  const addToFeatureImagesRef = (el: HTMLDivElement | null) => {
+  const addToFeatureImagesRef = (el: HTMLImageElement | null) => {
     if (el && !featureImagesRef.current.includes(el)) {
       featureImagesRef.current.push(el);
     }
@@ -227,7 +226,7 @@ export default function WhyChooseUs() {
     },
     {
       image: "/assets/8.png",
-      title: "Transparency and sustainability",
+      title: "Transparency and sustainability",
     },
   ];
 
@@ -258,8 +257,8 @@ export default function WhyChooseUs() {
             >
               <div className="p-6 flex flex-col items-center">
                 {/* Image container */}
-                <div ref={addToFeatureImagesRef} className="mb-2 w-28 h-28 relative">
-                  <Image src={item.image} alt={item.title} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) 64px, 64px" />
+                <div className="mb-2 w-28 h-28 flex items-center justify-center">
+                  <img ref={addToFeatureImagesRef} src={item.image} alt={item.title} className="max-w-full max-h-full object-contain" loading="lazy" />
                 </div>
 
                 {/* Title */}
@@ -273,7 +272,7 @@ export default function WhyChooseUs() {
 
         {/* Simple CTA */}
         <div className="text-center mt-12">
-          <a href="/contact" className="inline-block bg-[#592F1F] text-white px-6 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 font-medium">
+          <a href="/contact.html" className="inline-block bg-[#592F1F] text-white px-6 py-3 rounded-full transition-all duration-300 hover:bg-opacity-90 font-medium">
             Partner With Us
           </a>
         </div>

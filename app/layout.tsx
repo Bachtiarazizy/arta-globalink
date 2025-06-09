@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import JsonLd from "./components/json-ld";
+import PageLoader from "./components/pageLoader";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -46,10 +47,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>
-        <JsonLd />
-        <Navbar />
-        {children}
-        <Footer />
+        <PageLoader>
+          <JsonLd />
+          <Navbar />
+          {children}
+          <Footer />
+        </PageLoader>
       </body>
     </html>
   );

@@ -10,7 +10,6 @@ type Product = {
   type?: string;
   image: string;
   shortDesc: string;
-
   origin: string;
 };
 
@@ -64,7 +63,7 @@ export default function ProductCategoryPage({ products, categoryTitle, categoryD
               <Link href={`/products/${product.id}`} key={product.id}>
                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className="relative h-64 bg-gray-200">
-                    <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
+                    <Image src={product.image} alt={product.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="p-5">
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h3>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -202,7 +201,7 @@ export default function Certifications() {
           {certifications.map((cert, index) => (
             <div key={index} ref={addToRefs} className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 transform" onMouseEnter={handleCertHover} onMouseLeave={handleCertLeave}>
               <div className="relative p-4 certification-logo rounded-lg overflow-hidden">
-                <Image src={cert.src} alt={cert.alt} width={150} height={100} className="filter grayscale hover:grayscale-0 transition-all duration-500" />
+                <img src={cert.src} alt={cert.alt} width={150} height={100} className="filter grayscale hover:grayscale-0 transition-all duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent to-white opacity-50"></div>
               </div>
             </div>
